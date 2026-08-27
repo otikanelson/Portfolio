@@ -126,7 +126,7 @@
     width: 100%;
     aspect-ratio: 16 / 10;
     background: var(--card-bg);
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: var(--shadow-card);
     display: flex;
     align-items: center;
@@ -145,7 +145,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    border-radius: 12px;
+    border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 

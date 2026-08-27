@@ -1,7 +1,6 @@
 // ═══════════════════════════════════════════════════════════════
 // SCROLL ANIMATIONS & OBSERVERS
 // ═══════════════════════════════════════════════════════════════
-
 // Universal scroll animation initializer
 // Applies to any element with .scroll-animate class
 export function initUniversalScrollAnimations() {
@@ -64,14 +63,22 @@ export function initScrollAnimations() {
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Don't apply transforms to web-tile-info elements
+                if (entry.target.classList.contains('web-tile-info') || 
+                    entry.target.closest('.web-tile-info')) {
+                    return;
+                }
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
             }
         });
     }, observerOptions);
 
-    // Observe all sections for scroll animations
+    // Observe all sections for scroll animations (excluding web-tile-info children)
     document.querySelectorAll('section').forEach(section => {
+        // Skip if this is a web-tile-info element
+        if (section.classList.contains('web-tile-info')) return;
+        
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
         section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -100,8 +107,15 @@ export function initPortfolioAnimations() {
                 tiles.forEach((tile, index) => {
                     setTimeout(() => {
                         tile.style.opacity = '1';
-                        tile.style.transform = 'translateY(0) scale(1)';
                         tile.style.filter = 'blur(0)';
+                        
+                        if (tile.classList.contains('web-tile')) {
+                            // Slide-right matte reveal for web tiles
+                            tile.style.transform = 'translateX(0) scale(1)';
+                        } else {
+                            // Standard translate up for mobile/desktop showcases
+                            tile.style.transform = 'translateY(0) scale(1)';
+                        }
                     }, 600 + (index * 150));
                 });
             }
@@ -116,17 +130,20 @@ export function initPortfolioAnimations() {
         const tiles = section.querySelectorAll('.app-tile, .web-tile, .desktop-showcase');
         tiles.forEach(tile => {
             tile.style.opacity = '0';
-            tile.style.transform = 'translateY(30px) scale(0.95)';
             tile.style.filter = 'blur(5px)';
             tile.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+            if (tile.classList.contains('web-tile')) {
+                // Initial off-screen offset to the left for slide-right reveal
+                tile.style.transform = 'translateX(-30px) scale(0.95)';
+            } else {
+                tile.style.transform = 'translateY(30px) scale(0.95)';
+            }
         });
         
         portfolioObserver.observe(section);
     });
 }
-
-// Legacy section animations - kept for backwards compatibility
-// New sections should use .scroll-animate class instead
 
 // Trigger counter animation when stats section is visible
 export function initStatsObserver() {
@@ -169,13 +186,11 @@ export function initSkillsTrackReveal() {
         setTimeout(() => {
             track.style.opacity = '1';
             track.style.animation = 'scroll 30s linear infinite';
-        }, 500);
+        }, 100);
     });
 }
 
 // Persistent accordion expand/contract for .web-tile project cards.
-// Unlike pure CSS :hover, the expanded state sticks after the cursor
-// leaves the row — whichever tile was last hovered stays expanded.
 export function initWebTileAccordion() {
     const stage = document.querySelector('.web-stage');
     if (!stage) return;
@@ -192,7 +207,6 @@ export function initWebTileAccordion() {
         tile.addEventListener('mouseenter', () => expand(tile));
     });
 
-    // Default: whichever tile has .active (e.g. Darb), falling back to the first tile
     const initial = stage.querySelector('.web-tile.active') || tiles[0];
     expand(initial);
 }

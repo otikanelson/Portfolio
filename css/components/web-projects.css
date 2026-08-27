@@ -14,12 +14,12 @@
 }
 
 .web-tile {
-    flex: 0.4;
+    flex: 0.35;
     min-width: 0;
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    border-radius: 16px;
+    border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
         box-shadow 0.45s ease,
@@ -45,14 +45,14 @@
 
 .web-tile-preview {
     width: 100%;
-    height: 600px;
+    height: 470px;
     overflow: hidden;
     background: var(--dark-surface);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    border-radius: 12px;
+    border-radius: 5px;
 }
 
 .web-carousel-track {
@@ -82,7 +82,9 @@
     filter: brightness(1) saturate(1);
 }
 
-.web-tile.active .web-tile-preview img {
+.web-tile.expanded .web-tile-preview img,
+.web-tile.active .web-tile-preview img,
+.web-tile:hover .web-tile-preview img {
     filter: brightness(0.9) saturate(1);
     transform: scale(1.04);
 }
@@ -90,33 +92,37 @@
 .web-tile::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
-    height: 0%;
-    background: transparent;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0);
     pointer-events: none;
     z-index: 1;
-    transition: height 0.4s ease;
+    transition: background 0.4s ease;
+    border-radius: 12px;
 }
 
-.web-tile.active::after {
-    height: 0%;
-    background: transparent;
+.web-tile.expanded::after,
+.web-tile.active::after,
+.web-tile:hover::after {
+    background: rgba(0, 0, 0, 0.5);
 }
 
-/* Light theme: no overlay needed anymore */
+/* Light theme: lighter overlay on hover */
 [data-theme="light"] .web-tile::after {
-    background: transparent;
+    background: rgba(0, 0, 0, 0);
 }
 
-[data-theme="light"] .web-tile.active::after {
-    background: transparent;
+[data-theme="light"] .web-tile.expanded::after,
+[data-theme="light"] .web-tile.active::after,
+[data-theme="light"] .web-tile:hover::after {
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .web-tile-logo {
     position: absolute;
-    bottom: 14px;
+    top: 14px;
     left: 14px;
     width: 44px;
     height: 44px;
@@ -124,9 +130,27 @@
     object-fit: cover;
     border: 2px solid rgba(255, 255, 255, 0.15);
     background: var(--dark-surface);
-    z-index: 3;
-    transition: opacity 0.3s ease;
+    z-index: 10;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.web-tile.expanded .web-tile-logo,
+.web-tile.active .web-tile-logo,
+.web-tile:hover .web-tile-logo {
+    animation: slideLogoDown 1.2s ease forwards;
+}
+
+@keyframes slideLogoDown {
+    from {
+        top: 14px;
+        width: 44px;
+        height: 44px;
+    }
+    to {
+        top: 245px;
+        width: 44px;
+        height: 44px;
+    }
 }
 
 .web-tile-label {
@@ -140,6 +164,12 @@
     white-space: nowrap;
     transition: opacity 0.3s ease;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.web-tile.expanded .web-tile-label,
+.web-tile.active .web-tile-label,
+.web-tile:hover .web-tile-label {
+    opacity: 0;
 }
 
 /* Light theme web project text adjustments */
@@ -163,85 +193,63 @@
     right: 0;
     padding: 24px 20px 20px;
     background: transparent;
-    transform: translateY(100%);
-    opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
     z-index: 2;
-}
-
-.web-tile.active .web-tile-info {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.web-tile.active .web-tile-label,
-.web-tile.active .web-tile-logo {
     opacity: 0;
+    overflow: visible;
+    white-space: normal;
+}
+
+.web-tile.expanded .web-tile-info,
+.web-tile.active .web-tile-info,
+.web-tile:hover .web-tile-info {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
 }
 
 .web-tile-info h4 {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #ffffff !important;
-    margin-bottom: 5px;
-    background: linear-gradient(135deg, rgba(96, 44, 184, 0.591) 0%, rgba(115, 95, 175, 0.591) 50%, rgba(91, 42, 175, 0.604) 100%);
-    background-size: 200% 200%;
-    backdrop-filter: blur(2px);
-    padding: 6px 10px;
-    border-radius: 6px;
-    display: inline-block;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    animation: shimmer 3s ease-in-out infinite, typewriter-h4 1.5s steps(20) 0.3s both;
-    overflow: hidden;
-    white-space: nowrap;
+    margin-bottom: 6px;
+    margin-left: 46px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    white-space: normal;
+    clip-path: inset(0 100% 0 0);
+}
+
+.web-tile.expanded .web-tile-info h4,
+.web-tile.active .web-tile-info h4,
+.web-tile:hover .web-tile-info h4 {
+    animation: revealLeftToRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
 }
 
 .web-tile-info p {
-    font-size: 0.92rem;
-    color: #ffffff !important;
-    margin-bottom: 10px;
-    line-height: 1.5;
-    background: linear-gradient(135deg, rgba(96, 44, 184, 0.591) 0%, rgba(115, 95, 175, 0.591) 50%, rgba(91, 42, 175, 0.604) 100%);
-    background-size: 200% 200%;
-    backdrop-filter: blur(2px);
-    padding: 6px 10px;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    animation: shimmer 3s ease-in-out infinite 0.3s, typewriter-p 2s steps(40) 1s both;
-    overflow: hidden;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.95) !important;
+    margin-bottom: 12px;
+    line-height: 1.6;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    white-space: normal;
+    clip-path: inset(0 100% 0 0);
 }
 
-@keyframes shimmer {
-
-    0%,
-    100% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
+.web-tile.expanded .web-tile-info p,
+.web-tile.active .web-tile-info p,
+.web-tile:hover .web-tile-info p {
+    animation: revealLeftToRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
 }
 
-@keyframes typewriter-h4 {
+@keyframes revealLeftToRight {
     from {
-        max-width: 0;
+        clip-path: inset(0 100% 0 0);
     }
-
     to {
-        max-width: 100%;
-    }
-}
-
-@keyframes typewriter-p {
-    from {
-        max-height: 0;
-        opacity: 0;
-    }
-
-    to {
-        max-height: 100px;
-        opacity: 1;
+        clip-path: inset(0 0 0 0);
     }
 }
 
@@ -256,14 +264,6 @@
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity 0.3s ease 0.15s, transform 0.3s ease 0.15s;
-}
-
-.web-tile.active .web-tile-actions {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -272,7 +272,6 @@
 
 @media (max-width: 768px) {
 
-    /* 1. View All Button Formatting Fix */
     .web-row .portfolio-row-header {
         display: flex !important;
         align-items: center !important;
@@ -283,7 +282,6 @@
     .web-row .view-all-link {
         font-size: 0.72rem !important;
         white-space: nowrap !important;
-        /* Fixes "View All" breaking onto 2 lines */
         gap: 5px !important;
         border-radius: 20px !important;
         flex-shrink: 0 !important;
@@ -298,21 +296,18 @@
         font-size: 0.65rem !important;
     }
 
-    /* 2. Container & Stage Setup */
     .web-portfolio-section,
     #web-portfolio {
         height: auto !important;
         overflow: visible !important;
     }
 
-    /* Transform Stage into Horizontal Carousel */
     .web-stage {
         display: flex !important;
         flex-direction: row !important;
         overflow-x: auto !important;
         overflow-y: hidden !important;
         perspective: none !important;
-        /* Disable 3D desktop perspective */
         padding: 10px 4px 20px !important;
         gap: 16px !important;
         -webkit-overflow-scrolling: touch !important;
@@ -323,17 +318,14 @@
         display: none !important;
     }
 
-    /* 3. Horizontal Web Cards */
     .web-tile {
         flex: 0 0 85vw !important;
-        /* Fixed width cards for smooth swiping */
         max-width: 320px !important;
         min-width: 280px !important;
         display: flex !important;
         flex-direction: column !important;
         height: auto !important;
         transform: none !important;
-        /* Reset 3D desktop rotations */
         opacity: 1 !important;
         background: var(--dark-surface) !important;
         border: 1px solid var(--border) !important;
@@ -343,7 +335,6 @@
 
     .web-tile:last-child {
         transform: none !important;
-        /* Override 3D rotateY on last child */
     }
 
     .web-tile.active {
@@ -351,28 +342,25 @@
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--border-bright) !important;
     }
 
-    /* 4. Preview Window Adjustments */
     .web-tile-preview {
         height: 200px !important;
-        /* Compact preview height on mobile */
         border-radius: 16px 16px 0 0 !important;
-        position: relative !important
+        position: relative !important;
     }
 
-    /* Hide absolute overlay elements that obscure mobile preview */
     .web-tile-logo,
     .web-tile-label,
     .web-tile::after {
         display: none !important;
     }
 
-    /* 5. Info Overlay Below Card (Stacked Flow) */
     .web-tile-info {
         position: relative !important;
         bottom: auto !important;
         left: auto !important;
         right: auto !important;
         transform: none !important;
+        clip-path: none !important;
         opacity: 1 !important;
         padding: 16px !important;
         background: transparent !important;
@@ -383,11 +371,11 @@
         margin-bottom: 8px !important;
         white-space: normal !important;
         animation: none !important;
-        /* Disable typewriter clipping on mobile */
         max-width: 100% !important;
         background: none !important;
         padding: 0 !important;
         color: var(--text-primary) !important;
+        clip-path: none !important;
     }
 
     .web-tile-info p {
@@ -395,15 +383,14 @@
         line-height: 1.5 !important;
         margin-bottom: 12px !important;
         animation: none !important;
-        /* Disable typewriter clipping on mobile */
         max-height: none !important;
         opacity: 1 !important;
         background: none !important;
         padding: 0 !important;
         color: var(--text-secondary) !important;
+        clip-path: none !important;
     }
 
-    /* Light theme mobile text visibility fix */
     [data-theme="light"] .web-tile-info h4 {
         color: var(--text-primary) !important;
     }
@@ -416,7 +403,6 @@
         margin-bottom: 14px !important;
     }
 
-    /* 6. Action Buttons Grid */
     .web-tile-actions {
         opacity: 1 !important;
         transform: none !important;
@@ -432,7 +418,6 @@
         justify-content: center !important;
     }
 
-    /* Extra Small Screens (max-width: 480px) */
     @media (max-width: 480px) {
         .web-tile {
             flex: 0 0 88vw !important;
@@ -446,15 +431,13 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   DESKTOP BUTTON CLICK FIX
+   DESKTOP BUTTON CLICK FIX & HOVER BEHAVIOR
    ═══════════════════════════════════════════════════════════════ */
 @media (min-width: 769px) {
-    /* Prevent preview image slides from swallowing clicks */
     .web-carousel-slide {
         pointer-events: none !important;
     }
 
-    /* Elevate action container above all gradient pseudo-elements & preview layers */
     .web-tile-info {
         z-index: 10;
     }
@@ -470,10 +453,20 @@
         z-index: 21;
         cursor: pointer;
     }
+
+    .web-tile:not(.active):hover {
+        transform: scale(1.02);
+        box-shadow:
+            0 16px 48px rgba(0, 0, 0, 0.5),
+            0 0 0 1px var(--border-bright),
+            0 0 24px rgba(124, 58, 237, 0.15);
+    }
+
+    .web-tile:not(.active):hover .web-tile-preview {
+        z-index: 0;
+    }
 }
 
-
-/* Light theme web tile adjustments */
 [data-theme="light"] .web-tile {
     border: 1px solid var(--border);
     background: var(--card-bg);
