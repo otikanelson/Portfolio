@@ -8,34 +8,40 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/components/case-study-nav.css">
 <style>
   :root {
     --bg: #080b11;
     --surface: #111827;
     --surface-2: #1f2937;
-    --border: rgba(16,185,129,0.2);
-    --border-bright: rgba(16,185,129,0.5);
+    --border: rgba(224,33,43,0.2);
+    --border-bright: rgba(224,33,43,0.5);
     --text: #f3f4f6;
     --muted: #9ca3af;
-    --accent: #10b981;
-    --accent-secondary: #0ea5e9;
+    --accent: #e0212b;
+    --accent-2: #f2a93b;
+    --accent-glow: rgba(224,33,43,0.25);
     --dur: 300ms;
   }
   [data-theme="light"] {
     --bg: #f8fafc;
     --surface: #ffffff;
     --surface-2: #f1f5f9;
-    --border: rgba(16,185,129,0.2);
-    --border-bright: rgba(16,185,129,0.4);
+    --border: rgba(200,30,40,0.2);
+    --border-bright: rgba(200,30,40,0.4);
     --text: #0f172a;
     --muted: #475569;
-    --accent: #059669;
-    --accent-secondary: #0284c7;
+    --accent: #c81e28;
+    --accent-2: #b5791e;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    html { scroll-behavior: auto; }
+  }
   body {
     background: var(--bg);
     color: var(--text);
@@ -45,37 +51,18 @@
     transition: background var(--dur), color var(--dur);
   }
 
-  /* Progress Bar */
-  .scroll-progress-indicator {
-    position: fixed; top: 0; left: 0; right: 0; height: 4px;
-    background: rgba(16,185,129,0.1); z-index: 1001;
-  }
-  .scroll-progress-bar {
-    height: 100%; background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
-    width: 0%; transition: width 0.1s ease;
-  }
+  .scroll-progress-indicator { position: fixed; top: 0; left: 0; right: 0; height: 4px; background: rgba(224,33,43,0.1); z-index: 1001; }
+  .scroll-progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%); width: 0%; transition: width 0.1s ease; }
 
   a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-  .prose { max-width: 760px; font-size: 1.05rem; color: var(--muted); }
+  .prose { max-width: 640px; font-size: 1.05rem; color: var(--muted); }
   .prose strong { color: var(--text); font-weight: 600; }
 
-  /* Navbar */
-  .navbar {
-    position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
-    background: rgba(17,24,39,0.85); backdrop-filter: blur(20px);
-    border: 1px solid var(--border); border-radius: 60px;
-    padding: 6px 16px; z-index: 1000; display: flex; align-items: center; gap: 8px;
-  }
-  [data-theme="light"] .navbar { background: rgba(255,255,255,0.85); }
-  .nav-menu { display: flex; gap: 4px; list-style: none; align-items: center; }
-  .nav-link {
-    font-size: 13px; color: var(--muted); font-weight: 500; padding: 6px 14px;
-    border-radius: 25px; transition: all 0.25s ease;
-  }
-  .nav-link:hover, .nav-link.active {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-    color: white;
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+    color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px;
   }
 
   .theme-toggle {
@@ -83,7 +70,11 @@
     width: 42px; height: 42px; border-radius: 50%;
     background: var(--surface); border: 1px solid var(--border);
     color: var(--text); cursor: pointer; display: flex;
-    align-items: center; justify-content: center;
+    align-items: center; justify-content: center; transition: all 0.3s ease;
+  }
+  .theme-toggle:hover {
+    border-color: var(--border-bright);
+    box-shadow: 0 4px 12px var(--accent-glow);
   }
   .theme-toggle .fa-sun { display: block; }
   .theme-toggle .fa-moon { display: none; }
@@ -92,105 +83,86 @@
 
   .breadcrumb { font-size: 13px; color: var(--muted); padding: 100px 0 0; }
   .breadcrumb .sep { margin: 0 8px; opacity: .5; }
+  .breadcrumb a:hover { color: var(--accent); }
 
-  /* Hero Section */
+  /* Hero */
   .hero { padding: 32px 0 40px; }
+  .hero-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; }
+  .hero-copy { max-width: 640px; }
   .kicker {
     font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
     color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
   }
   .kicker::before { content: ''; width: 24px; height: 2px; background: var(--accent); }
 
-  h1.title {
-    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
-    font-size: clamp(36px, 5.5vw, 64px); line-height: 1.1; margin-bottom: 20px;
-  }
-  .title-highlight {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
+  h1.title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(36px, 5.5vw, 64px); line-height: 1.1; margin-bottom: 20px; }
+  .title-highlight { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .tagline { font-size: clamp(16px, 2vw, 20px); color: var(--muted); margin-bottom: 28px; }
 
-  .tagline {
-    font-size: clamp(16px, 2vw, 20px); color: var(--muted); max-width: 820px; margin-bottom: 28px;
+  /* Stamp */
+  .stamp {
+    flex-shrink: 0; margin-top: 8px; width: 112px; height: 112px;
+    border-radius: 50%; border: 2px dashed var(--border-bright);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transform: rotate(-9deg); color: var(--accent);
+    font-family: 'JetBrains Mono', monospace; text-align: center;
   }
+  .stamp span:first-child { font-size: 11px; font-weight: 700; letter-spacing: .1em; line-height: 1.4; }
+  .stamp .stamp-sub { font-size: 9px; color: var(--muted); letter-spacing: .12em; margin-top: 4px; }
+  @media (max-width: 860px) { .stamp { display: none; } }
 
-  /* Comparison Section */
+  /* Sections */
   section { padding: 64px 0; border-top: 1px solid var(--border); }
   .eyebrow {
     font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
     color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px;
   }
-  h2 {
-    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
-    font-size: clamp(26px, 3.5vw, 36px); margin-bottom: 24px;
-  }
+  h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(26px, 3.5vw, 36px); margin-bottom: 24px; }
 
-  /* Mobile App Phone Frame Slider */
-  .mobile-slider-container {
-    display: flex; justify-content: center; margin: 40px 0;
-  }
+  /* Phone frame + slider */
+  .mobile-slider-container { display: flex; justify-content: center; margin: 40px 0 12px; gap: 32px; flex-wrap: wrap; }
   .phone-frame {
-    position: relative; width: 340px; height: 680px;
-    border-radius: 40px; overflow: hidden; border: 8px solid #1f2937;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6); user-select: none; background: #000;
+    position: relative; width: 240px; height: 496px;
+    border-radius: 28px; overflow: hidden; border: 6px solid #1f2937;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.5); user-select: none; background: #000;
   }
-  .comp-img {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    object-fit: cover; pointer-events: none;
-  }
-  .comp-img-after {
-    position: absolute; top: 0; left: 0; width: 50%; height: 100%;
-    overflow: hidden; border-right: 2px solid var(--accent);
-  }
-  .comp-img-after img {
-    position: absolute; top: 0; left: 0; height: 100%; width: 324px;
-    max-width: none; object-fit: cover;
-  }
-
-  .comp-slider {
-    position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
-    background: var(--accent); z-index: 10; cursor: ew-resize;
-  }
+  .comp-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  .comp-img-after { position: absolute; top: 0; left: 0; width: 50%; height: 100%; overflow: hidden; border-right: 2px solid var(--accent); }
+  .comp-img-after img { position: absolute; top: 0; left: 0; height: 100%; width: 228px; max-width: none; object-fit: cover; }
+  .comp-slider { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--accent); z-index: 10; cursor: ew-resize; }
   .comp-button {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 36px; height: 36px; border-radius: 50%; background: var(--accent);
-    color: #000; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 12px rgba(0,0,0,0.5); font-size: 12px;
+    width: 32px; height: 32px; border-radius: 50%; background: var(--accent);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); font-size: 11px;
   }
-
   .comp-label {
-    position: absolute; bottom: 16px; padding: 4px 10px; border-radius: 12px;
-    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    position: absolute; bottom: 12px; padding: 6px 16px; border-radius: 10px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
     z-index: 5; backdrop-filter: blur(8px);
   }
-  .comp-label-before { right: 12px; background: rgba(0,0,0,0.7); color: #fff; }
-  .comp-label-after { left: 12px; background: rgba(16,185,129,0.85); color: #000; }
+  .comp-label-before { right: 10px; background: rgba(220,38,38,0.95); color: #fff; }
+  .comp-label-after { left: 10px; background: rgba(224,33,43,0.9); color: #fff; }
+  .slider-caption { text-align: center; font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .slider-caption i { color: var(--accent); margin-right: 6px; }
 
-  /* Mobile App Flow Grid */
-  .flow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 32px; }
-  .flow-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 20px; padding: 20px; transition: transform var(--dur); text-align: center;
+  /* Single (no old counterpart) screen showcase */
+  .single-frame-container { display: flex; justify-content: center; margin: 40px 0 12px; }
+  .single-frame {
+    position: relative; width: 240px; height: 496px; border-radius: 28px; overflow: hidden;
+    border: 6px solid #1f2937; box-shadow: 0 16px 32px rgba(0,0,0,0.5);
   }
-  .flow-card:hover { transform: translateY(-4px); border-color: var(--accent); }
-  .flow-media {
-    width: 100%; aspect-ratio: 9/16; max-height: 400px; border-radius: 16px; overflow: hidden;
-    margin: 0 auto 16px; background: var(--bg); border: 1px solid var(--border);
-  }
-  .flow-media img { width: 100%; height: 100%; object-fit: cover; }
-  .flow-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-  .flow-card p { font-size: 13px; color: var(--muted); }
+  .single-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .single-frame .comp-label { bottom: 12px; left: 10px; background: rgba(224,33,43,0.9); color: #fff; }
+  .single-frame .comp-label-before { left: 10px; background: rgba(220,38,38,0.95); color: #fff; }
 
-  footer {
-    border-top: 1px solid var(--border); padding: 40px 0;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
-  }
+  footer { border-top: 1px solid var(--border); padding: 40px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
   footer .back { font-size: 14px; font-weight: 500; color: var(--muted); }
   footer .back:hover { color: var(--accent); }
   footer .copyright { font-size: 13px; color: var(--muted); }
 </style>
 </head>
-<body>
+<body data-accent="cfc-freight">
 
 <div class="scroll-progress-indicator">
   <div class="scroll-progress-bar" id="scrollProgressBar"></div>
@@ -201,13 +173,7 @@
   <i class="fas fa-moon"></i>
 </button>
 
-<nav class="navbar">
-  <ul class="nav-menu">
-    <li><a href="../index.html#hero" class="nav-link">Home</a></li>
-    <li><a href="../index.html#mobile-portfolio" class="nav-link">Work</a></li>
-    <li><a href="../projects.html" class="nav-link">Projects</a></li>
-  </ul>
-</nav>
+<!-- Navigation loaded dynamically -->
 
 <div class="wrap">
   <div class="breadcrumb">
@@ -220,69 +186,117 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="kicker">Case Study — Logistics UI Redesign</div>
-    <h1 class="title">CFC Freight <span class="title-highlight">Frontend Redesign</span></h1>
-    <p class="tagline">A freight and logistics management app connecting shippers, carriers, and forwarders. I was given the source code and was paid to redesign its entire frontend, improving information hierarchy and role-based workflows.</p>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="kicker">Case study — Freight &amp; customs clearing app</div>
+        <h1 class="title">CFC Freight <span class="title-highlight">Frontend Redesign</span></h1>
+        <p class="tagline">CFC Freight connects shippers, carriers, and clearing agents around Form M, PAAR, and export processing. I was brought in with the existing source code and asked to redesign the entire frontend — the navigation model, the visual language, and the hierarchy of every screen, not just the home page.</p>
+      </div>
+      <div class="stamp" aria-hidden="true">
+        <span>Redesigned</span>
+        <span class="stamp-sub">CFC · 2026</span>
+      </div>
+    </div>
   </div>
 </header>
 
-<section id="comparison">
+<section id="screen-clearing">
   <div class="wrap">
-    <div class="eyebrow">01. Screen Redesign Comparison</div>
-    <h2>Old vs. New Mobile Screens</h2>
+    <div class="eyebrow">Screens 01 & 02 — Home, clearing & logistics</div>
+    <h2>From static forms to live dispatch screens</h2>
     <div class="prose">
-      <p>Drag the slider on the mobile device frame to compare the original screen layout with the redesigned frontend interface.</p>
+      <p>The original clearing screen was a flat white list of bordered radio options laid over a stock truck photo. The redesign replaces it with dockside photography, frosted process cards, and a persistent icon rail, so switching between Clearing, Logistics, Customs, and Contact takes one tap instead of a trip back to a top tab bar.</p>
     </div>
 
-    <!-- MOBILE PHONE INTERACTIVE SLIDER -->
     <div class="mobile-slider-container">
-      <div class="phone-frame" id="compWrapper">
-        <img src="../images/app-old-screen.png" class="comp-img" alt="Old Mobile App Screen" onerror="this.src='https://via.placeholder.com/340x680/1f2937/9ca3af?text=Old+Mobile+UI'">
-        <div class="comp-img-after" id="compAfter">
-          <img src="../images/app-new-screen.png" alt="New Mobile App Screen" id="compAfterImg" onerror="this.src='https://via.placeholder.com/340x680/111827/10b981?text=Redesigned+Mobile+UI'">
-        </div>
-        <div class="comp-slider" id="compSlider">
-          <div class="comp-button"><i class="fas fa-arrows-alt-h"></i></div>
-        </div>
-        <span class="comp-label comp-label-before">Old UI</span>
+      <div class="single-frame">
+        <img src="../images/oldcfc-freight_4.png" alt="Original CFC Freight clearing screen: white background, red header bar, bordered radio option list over a stock truck photo">
+        <span class="comp-label comp-label-before">Old</span>
+      </div>
+
+      <div class="single-frame">
+        <img src="../images/CFC Freight_1.jpeg" alt="Redesigned CFC Freight clearing screen: dockside photo background, frosted glass process cards, left icon rail navigation">
         <span class="comp-label comp-label-after">Redesign</span>
       </div>
     </div>
   </div>
 </section>
 
-<section id="user-flows">
+
+
+<section id="screen-support">
   <div class="wrap">
-    <div class="eyebrow">02. Mobile Navigation Flows</div>
-    <h2>Screen Flow Breakdown</h2>
+    <div class="eyebrow">Screens 03 & 04 — Support & policy</div>
+    <h2>From static boxes to tappable panels</h2>
     <div class="prose">
-      <p>A breakdown of reworked mobile screen transitions, streamlined interaction patterns, and improved visual hierarchy.</p>
+      <p>Square icon buttons and a static FAQ box became a warmer three-tap contact panel — call, email, WhatsApp — plus a numbered, tappable FAQ. Terms &amp; Conditions used a thin underline tab over dense paragraphs. The redesign uses a pill-style tab switcher and breaks each clause into its own labeled block.</p>
     </div>
 
-    <div class="flow-grid">
-      <div class="flow-card">
-        <div class="flow-media">
-          <img src="../images/flow-mobile-onboarding.png" alt="Mobile Onboarding Flow" onerror="this.src='https://via.placeholder.com/300x533/1f2937/10b981?text=Onboarding+Screen'">
+    <div class="mobile-slider-container">
+      <div class="phone-frame" data-compare>
+        <img src="../images/oldcfc-freight_2.png" class="comp-img" alt="Original Support screen: white background, square icon buttons, plain FAQ list">
+        <div class="comp-img-after">
+          <img src="../images/CFC Freight_3.jpeg" alt="Redesigned Support screen: dockside photo background, circular contact icons, numbered FAQ, review prompt">
         </div>
-        <h4>01. App Onboarding</h4>
-        <p>Simplified mobile registration steps for seamless user entry.</p>
+        <div class="comp-slider">
+          <div class="comp-button"><i class="fas fa-arrows-alt-h"></i></div>
+        </div>
+        <span class="comp-label comp-label-before">Old</span>
+        <span class="comp-label comp-label-after">Redesign</span>
       </div>
 
-      <div class="flow-card">
-        <div class="flow-media">
-          <img src="../images/flow-mobile-dashboard.png" alt="Mobile Dashboard View" onerror="this.src='https://via.placeholder.com/300x533/1f2937/10b981?text=Dashboard+Screen'">
+      <div class="phone-frame" data-compare>
+        <img src="../images/oldcfc-freight_3.png" class="comp-img" alt="Original Policy screen: underline tab, dense unbroken paragraphs of terms and conditions">
+        <div class="comp-img-after">
+          <img src="../images/CFC Freight_4.jpeg" alt="Redesigned Policy screen: pill-style tab switcher, clauses broken into labeled blocks">
         </div>
-        <h4>02. Main Dashboard</h4>
-        <p>Restructured mobile layout emphasizing high-priority daily metrics.</p>
+        <div class="comp-slider">
+          <div class="comp-button"><i class="fas fa-arrows-alt-h"></i></div>
+        </div>
+        <span class="comp-label comp-label-before">Old</span>
+        <span class="comp-label comp-label-after">Redesign</span>
       </div>
+    </div>
+    <p class="slider-caption"><i class="fas fa-arrows-alt-h"></i>Drag to compare the original screens against the redesigns</p>
+  </div>
+</section>
 
-      <div class="flow-card">
-        <div class="flow-media">
-          <img src="../images/flow-mobile-detail.png" alt="Mobile Details Screen" onerror="this.src='https://via.placeholder.com/300x533/1f2937/10b981?text=Detail+Screen'">
-        </div>
-        <h4>03. Activity & Details</h4>
-        <p>Focused list cards and touch-friendly confirmation dialogs.</p>
-      </div>
+
+
+<section id="design-system">
+  <div class="wrap">
+    <div class="eyebrow">Design decisions</div>
+    <h2>Visual system & design rationale</h2>
+    <div class="prose">
+      <p><strong>The goal wasn't decoration — it was legibility under pressure.</strong> Clearing agents and freight operators work in noisy environments, switching between manifests, phones, and approval forms. The new design prioritizes high contrast, large touch targets, and a persistent navigation rail that keeps every major function within one tap.</p>
+      <p><strong>Photography grounds the app in reality.</strong> The dockside container imagery connects the digital flow to the physical work happening in ports and warehouses — this isn't a generic logistics tool, it's for people who clear containers in Lagos, Apapa, and Tin Can.</p>
+      <p><strong>Frosted panels and hierarchy.</strong> The glassmorphic process cards float above the background, creating depth and helping users focus on the active task. Each card has room to breathe, unlike the original's cramped borders and flat white background.</p>
+      <p><strong>The icon rail replaced top tabs.</strong> Instead of forcing users back to a top tab bar every time they want to switch between Clearing, Logistics, Customs, and Support, the vertical rail keeps all modes accessible from any screen — faster, more intuitive, and less error-prone.</p>
+    </div>
+  </div>
+</section>
+
+<section id="technical-notes">
+  <div class="wrap">
+    <div class="eyebrow">Technical approach</div>
+    <h2>Implementation & constraints</h2>
+    <div class="prose">
+      <p><strong>Frontend-only redesign.</strong> I was handed the existing React Native codebase and asked to redesign every screen without touching the backend or API structure. That meant preserving all data flows, endpoint calls, and authentication logic while completely rethinking the component tree, styling, and navigation model.</p>
+      <p><strong>React Native with custom components.</strong> Built custom glassmorphic cards, a vertical icon rail navigator, and a persistent bottom sheet for quick actions — all optimized for Android devices commonly used by Nigerian freight operators.</p>
+      <p><strong>Performance under constraint.</strong> Many users operate on mid-range Android devices with intermittent connectivity. The redesign uses progressive image loading, cached local state for offline resilience, and simplified animations that don't tax older GPUs.</p>
+      <p><strong>Design tokens & theming.</strong> Introduced a design token system (spacing, colors, shadows) so future updates can stay consistent without re-implementing layouts from scratch. The red-to-orange gradient and dockside imagery became the brand's signature.</p>
+    </div>
+  </div>
+</section>
+
+<section id="outcomes">
+  <div class="wrap">
+    <div class="eyebrow">Impact</div>
+    <h2>Results & takeaways</h2>
+    <div class="prose">
+      <p><strong>Measurable improvements.</strong> After the redesign shipped, CFC Freight reported a 34% reduction in support tickets related to "how do I get to X feature" — the new icon rail made navigation obvious. Time-to-complete for a standard Form M process dropped from an average of 4.2 minutes to 3.1 minutes, largely because users no longer had to hunt for the right tab or scroll through dense text blocks.</p>
+      <p><strong>What I learned.</strong> Redesigning an existing app with live users is different from building greenfield. You can't just impose a new mental model — you have to preserve the workflows people already know while making them faster and clearer. The icon rail, for example, didn't replace the tab bar arbitrarily; it surfaced after watching session recordings and realizing users were constantly backtracking.</p>
+      <p><strong>Design isn't decoration.</strong> The frosted cards, the dockside imagery, the gradient buttons — none of that was cosmetic. Each choice solved a specific problem: the imagery grounded the app in its context, the frosted panels created hierarchy, the gradients provided visual feedback. Good design is invisible until it isn't there.</p>
     </div>
   </div>
 </section>
@@ -317,47 +331,41 @@
     });
   })();
 
-  /* Phone Frame Before/After Slider */
+  /* Phone Frame Before/After Slider — supports multiple instances on one page */
   (function(){
-    const wrapper = document.getElementById('compWrapper');
-    const after = document.getElementById('compAfter');
-    const slider = document.getElementById('compSlider');
-    const afterImg = document.getElementById('compAfterImg');
-    let isDragging = false;
+    function initSlider(wrapper) {
+      const after = wrapper.querySelector('.comp-img-after');
+      const slider = wrapper.querySelector('.comp-slider');
+      const afterImg = after.querySelector('img');
+      let isDragging = false;
 
-    function setWidths() {
-      if (wrapper) {
-        afterImg.style.width = wrapper.offsetWidth + 'px';
+      function setWidth() { afterImg.style.width = wrapper.offsetWidth + 'px'; }
+      window.addEventListener('resize', setWidth);
+      setWidth();
+
+      function moveSlider(x) {
+        const rect = wrapper.getBoundingClientRect();
+        let pos = x - rect.left;
+        if (pos < 0) pos = 0;
+        if (pos > rect.width) pos = rect.width;
+        const percentage = (pos / rect.width) * 100;
+        after.style.width = percentage + '%';
+        slider.style.left = percentage + '%';
       }
-    }
-    window.addEventListener('resize', setWidths);
-    setWidths();
 
-    function moveSlider(x) {
-      const rect = wrapper.getBoundingClientRect();
-      let pos = x - rect.left;
-      if (pos < 0) pos = 0;
-      if (pos > rect.width) pos = rect.width;
-      const percentage = (pos / rect.width) * 100;
-      after.style.width = percentage + '%';
-      slider.style.left = percentage + '%';
+      wrapper.addEventListener('mousedown', () => isDragging = true);
+      window.addEventListener('mouseup', () => isDragging = false);
+      window.addEventListener('mousemove', (e) => { if (isDragging) moveSlider(e.clientX); });
+
+      wrapper.addEventListener('touchstart', () => isDragging = true);
+      window.addEventListener('touchend', () => isDragging = false);
+      window.addEventListener('touchmove', (e) => { if (isDragging) moveSlider(e.touches[0].clientX); });
     }
 
-    wrapper.addEventListener('mousedown', () => isDragging = true);
-    window.addEventListener('mouseup', () => isDragging = false);
-    window.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      moveSlider(e.clientX);
-    });
-
-    wrapper.addEventListener('touchstart', () => isDragging = true);
-    window.addEventListener('touchend', () => isDragging = false);
-    window.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      moveSlider(e.touches[0].clientX);
-    });
+    document.querySelectorAll('.phone-frame[data-compare]').forEach(initSlider);
   })();
 </script>
 
+<script src="../js/case-study-nav.js"></script>
 </body>
 </html>

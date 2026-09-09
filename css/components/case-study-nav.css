@@ -1,0 +1,123 @@
+/* Case Study Navigation Styles */
+.case-study-navbar {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(22, 22, 42, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 60px;
+  padding: 6px 16px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.case-study-navbar:hover {
+  border-color: var(--border-bright);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  transform: translateX(-50%) translateY(-2px);
+}
+
+[data-theme="light"] .case-study-navbar {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .case-study-navbar:hover {
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.12);
+}
+
+.case-study-navbar .nav-menu {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.case-study-navbar .nav-link {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 25px;
+  transition: all 0.25s ease;
+  display: inline-block;
+}
+
+.case-study-navbar .nav-link:hover,
+.case-study-navbar .nav-link.active {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.case-study-navbar .nav-resume {
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  color: var(--accent) !important;
+}
+
+.case-study-navbar .nav-resume:hover {
+  background: var(--accent);
+  color: white !important;
+  border-color: var(--accent);
+}
+
+.case-study-navbar .nav-resume i {
+  font-size: 11px;
+  margin-left: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .case-study-navbar {
+    top: 12px;
+    padding: 4px 10px;
+  }
+
+  .case-study-navbar .nav-menu {
+    gap: 2px;
+  }
+
+  .case-study-navbar .nav-link {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .case-study-navbar .nav-resume {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .case-study-navbar .nav-resume i {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .case-study-navbar {
+    width: calc(100% - 32px);
+    max-width: 600px;
+  }
+
+  .case-study-navbar .nav-menu {
+    gap: 1px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .case-study-navbar .nav-link {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .case-study-navbar .nav-resume {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}

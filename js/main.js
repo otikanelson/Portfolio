@@ -19,7 +19,8 @@ import {
     initPortfolioAnimations,
     initStatsObserver, 
     initParallax, 
-    initSkillsTrackReveal 
+    initSkillsTrackReveal,
+    initWebTileAccordion
 } from './components/animations.js';
 import { initContactForm } from './components/form.js';
 import { 
@@ -61,6 +62,7 @@ window.addEventListener('componentsLoaded', function() {
     initStatsObserver();
     initParallax();
     initSkillsTrackReveal();
+    initWebTileAccordion();
     
     // Form handling
     initContactForm();

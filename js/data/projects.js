@@ -4,17 +4,6 @@
 
 // Project data
 const PROJECTS = {
-    frebfit: {
-        name: 'FREBFIT',
-        subtitle: 'Fitness Application — FREBSON FITNESS',
-        description: 'During my NIIT internship, I met trainers struggling to connect with clients beyond the gym. They had expertise but no platform. FREBFIT became my answer—a mobile fitness app that bridges that gap. Built with Java and Android Studio, it helps people find trainers, select workouts, and track progress. It was my first real dive into native Android, and it taught me that code isn\'t just logic—it\'s about solving real human problems.',
-        rating: '5.0', downloads: '12', category: 'Health & Fitness',
-        tags: ['Java', 'Android Studio', 'Material Design', 'UI/UX'],
-        github: 'https://github.com/otikanelson',
-        apk: null,
-        icon: 'images/Frebfit Logo.png',
-        screenshots: ['images/Frebfit_1.png', 'images/Frebfit_2.png', 'images/Frebfit_3.png', 'images/Frebfit_4.png']
-    },
     duorecall: {
         name: 'DUO Recall',
         subtitle: 'Flashcard Learning — Spaced Repetition',

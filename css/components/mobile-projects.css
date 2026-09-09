@@ -27,7 +27,7 @@
 .app-tile:hover {
     border-color: var(--border-bright);
     transform: translateY(-5px);
-    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4), 0 0 18px rgba(124, 58, 237, 0.2);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4); /* Removed pink/purple glow */
 }
 
 .app-tile-banner {
@@ -77,20 +77,23 @@
 
 .app-tile-tags {
     display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
+    gap: 6px;
+    flex-wrap: nowrap;     /* Prevents vertical stacking */
+    overflow: hidden;
+    margin-top: 6px;
 }
 
 .app-tag {
-    font-size: 0.5rem;
-    font-weight: 600;
-    padding: 2px 5px;
-    border-radius: 20px;
-    background: rgba(124, 58, 237, 0.15);
-    color: var(--primary-light);
-    border: 1px solid rgba(124, 58, 237, 0.25);
+    font-size: 0.6rem;
+    font-weight: 500;
+    line-height: 1;
+    padding: 4px 9px;
+    border-radius: 12px;
+    background: rgba(50, 4, 94, 0.615);
+    color: rgba(255, 255, 255, 0.9);
     white-space: nowrap;
     flex-shrink: 0;
+    border: none;
 }
 
 /* Mobile Row Interaction */
@@ -352,7 +355,6 @@
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        /* Hide scrollbar for clean UI */
     }
 
     .mobile-row .project-strip::-webkit-scrollbar {
@@ -364,7 +366,6 @@
         font-size: 0.72rem !important;
         padding: 6px 12px !important;
         white-space: nowrap !important;
-        /* Prevents "View All" from breaking onto 2 lines */
         gap: 5px !important;
         border-radius: 20px !important;
         flex-shrink: 0 !important;
@@ -382,7 +383,6 @@
     /* Mobile Tile Sizing */
     .app-tile {
         width: 140px;
-        /* Slightly smaller for mobile viewports */
         border-radius: 14px;
     }
 
@@ -399,11 +399,6 @@
         font-size: 0.78rem;
     }
 
-    .app-tag {
-        font-size: 0.45rem;
-        padding: 2px 4px;
-    }
-
     /* Override Desktop Split-Screen Behavior when Focused */
     .mobile-row.tile-focused .project-strip {
         width: 100% !important;
@@ -418,7 +413,6 @@
     .mobile-row.tile-focused .app-tile {
         width: 140px !important;
         flex-direction: column !important;
-        /* Retain tile shape */
     }
 
     .mobile-row.tile-focused .app-tile .app-tile-banner,
@@ -430,7 +424,6 @@
 
     .mobile-row.tile-focused .app-tile .app-tile-tags {
         display: flex !important;
-        /* Keep tags visible */
     }
 
     /* Detail Panel (Stacked Below on Mobile) */
@@ -439,7 +432,6 @@
         border-top: 1px solid var(--border);
         padding: 20px 16px;
         max-height: 500px;
-        /* Enable smooth scrolling inside detail panel */
     }
 
     .detail-header {
@@ -484,7 +476,6 @@
 
     .screenshot-img {
         height: 210px;
-        /* Scaled down mobile screenshots */
     }
 }
 
@@ -501,7 +492,6 @@
 
     .detail-actions {
         grid-template-columns: 1fr;
-        /* Stack action buttons full width */
     }
 
     .screenshot-img {

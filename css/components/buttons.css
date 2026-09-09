@@ -57,7 +57,7 @@
 
 .btn-vercel {
     background: rgba(255, 255, 255, 0.08);
-    color: var(--text-primary);
+    color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -126,7 +126,7 @@
 
 [data-theme="light"] .btn-vercel {
     background: rgba(139, 92, 246, 0.08);
-    color: var(--text-primary);
+    color: #ffffff !important;
     border: 1px solid var(--border);
 }
 

@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/components/case-study-nav.css">
 <style>
   :root{
     --bg:#0a0a14;
@@ -277,7 +278,7 @@
   }
 </style>
 </head>
-<body>
+<body data-accent="afrochinatrade">
 
 <!-- Scroll Progress -->
 <div class="scroll-progress-indicator">
@@ -290,22 +291,11 @@
   <i class="fas fa-moon"></i>
 </button>
 
-<nav class="navbar">
-  <ul class="nav-menu">
-    <li><a href="../index.html#hero" class="nav-link">Home</a></li>
-    <li><a href="../index.html#mobile-portfolio" class="nav-link">Work</a></li>
-    <li><a href="../projects.html" class="nav-link">Projects</a></li>
-    <li><a href="../index.html#about" class="nav-link">About</a></li>
-    <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1_PRJsUyyVbCnhK2Y_D75CgdQ4Yf0Y7KM" class="nav-link nav-resume" target="_blank" rel="noopener">Resume <i class="fas fa-download"></i></a></li>
-  </ul>
-</nav>
+<!-- Navigation loaded dynamically -->
 
 <div class="wrap">
   <div class="breadcrumb">
     <a href="../index.html">Home</a>
-    <span class="sep">/</span>
-    <a href="../projects.html">Projects</a>
     <span class="sep">/</span> AFROCHINATRADE
   </div>
 </div>
@@ -448,8 +438,9 @@
       <div class="meta-row"><div class="k">MY ROLE</div><div class="v">Full-Stack Mobile Developer</div></div>
       <div class="meta-row"><div class="k">CLIENT / COMPANY</div><div class="v">AFROCHINATRADE Organization</div></div>
       <div class="meta-row"><div class="k">TECH STACK</div><div class="v">React Native · Node.js · Express · MongoDB · REST APIs</div></div>
-      <div class="meta-row"><div class="k">DEPLOYMENT</div><div class="v">Google Play Store & Live Production Web Server</div></div>
-      <div class="meta-row"><div class="k">LIVE APP</div><div class="v"><a href="https://play.google.com/store/apps/details?id=com.afrochinatrade_mobile.act_mobile" target="_blank" rel="noopener">Google Play Store Page ↗</a></div></div>
+      <div class="meta-row"><div class="k">DEPLOYMENT</div><div class="v">Google Play Store, App Store & Live Production Web Server</div></div>
+      <div class="meta-row"><div class="k">GOOGLE PLAY</div><div class="v"><a href="https://play.google.com/store/apps/details?id=com.afrochinatrade_mobile.act_mobile" target="_blank" rel="noopener">Google Play Store Page ↗</a></div></div>
+      <div class="meta-row"><div class="k">APP STORE</div><div class="v"><a href="https://apps.apple.com/us/app/afrochinatrade/id6794323826" target="_blank" rel="noopener">Apple App Store Page ↗</a></div></div>
       <div class="meta-row"><div class="k">WEB PLATFORM</div><div class="v"><a href="https://afrochinatrade.com/" target="_blank" rel="noopener">afrochinatrade.com ↗</a></div></div>
       <div class="meta-row"><div class="k">SOURCE CODE</div><div class="v"><a href="https://github.com/otikanelson/AfroChinaTrade" target="_blank" rel="noopener">github.com/otikanelson/AfroChinaTrade ↗</a></div></div>
     </div>
@@ -458,7 +449,6 @@
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; width:100%;">
-    <a class="back" href="../projects.html">← Back to all projects</a>
     <span class="copyright">© 2026 Nelson Otika. All rights reserved.</span>
   </div>
 </footer>
@@ -489,5 +479,6 @@
   })();
 </script>
 
+<script src="../js/case-study-nav.js"></script>
 </body>
 </html>

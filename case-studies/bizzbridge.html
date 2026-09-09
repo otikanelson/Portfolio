@@ -9,38 +9,64 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/components/case-study-nav.css">
 <style>
-  :root{--bg:#0a0a14;--surface:#16162a;--surface-2:#1e1e38;--border:rgba(124,58,237,0.2);--border-bright:rgba(124,58,237,0.5);--text:#f1f0ff;--muted:#8b8aaa;--accent:#ec4899;--accent-soft:rgba(236,72,153,.14);--dur:420ms;}
-  [data-theme="light"] {--bg:#fafafa;--surface:#ede9fe;--surface-2:#ddd6fe;--border:rgba(139,92,246,0.15);--border-bright:rgba(139,92,246,0.35);--text:#0f172a;--muted:#475569;--accent:#ec4899;}
+  :root{
+    --bg:#0a0a14;
+    --surface:#16162a;
+    --surface-2:#1e1e38;
+    --border:rgba(220,20,60,0.2);
+    --border-bright:rgba(220,20,60,0.5);
+    --text:#f1f0ff;
+    --muted:#8b8aaa;
+    --accent:#DC143C;
+    --accent-2:#FFD700;
+    --accent-glow:rgba(220,20,60,0.25);
+    --accent-soft:rgba(220,20,60,0.14);
+    --dur:420ms;
+  }
+  [data-theme="light"] {
+    --bg:#fafafa;
+    --surface:#ede9fe;
+    --surface-2:#ddd6fe;
+    --border:rgba(220,20,60,0.15);
+    --border-bright:rgba(220,20,60,0.35);
+    --text:#0f172a;
+    --muted:#475569;
+    --accent:#DC143C;
+    --accent-2:#FFD700;
+    --accent-glow:rgba(220,20,60,0.15);
+    --accent-soft:rgba(220,20,60,0.08);
+  }
   @media (prefers-reduced-motion:reduce){ :root{ --dur:0ms; } }
   *{ box-sizing:border-box; margin:0; padding:0; }
   html{ scroll-behavior:smooth; }
   body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background var(--dur), color var(--dur);}
   .scroll-progress-indicator{position:fixed; top:0; left:0; right:0; height:4px;background:rgba(124,58,237,0.1); z-index:1001;}
-  .scroll-progress-bar{height:100%; background:linear-gradient(135deg,#7c3aed 0%,#a78bfa 50%,#06b6d4 100%);transition:width 0.1s ease;box-shadow:0 0 10px rgba(124,58,237,0.5);}
-  [data-theme="light"] .scroll-progress-indicator{background:rgba(139,92,246,0.08);}
-  [data-theme="light"] .scroll-progress-bar{background:linear-gradient(135deg,#8b5cf6 0%,#a78bfa 50%,#06b6d4 100%);}
+  .scroll-progress-bar{height:100%; background:linear-gradient(90deg,var(--accent) 0%,var(--accent-2) 100%);transition:width 0.1s ease;box-shadow:0 0 10px rgba(220,20,60,0.5);}
+  [data-theme="light"] .scroll-progress-indicator{background:rgba(220,20,60,0.08);}
+  [data-theme="light"] .scroll-progress-bar{background:linear-gradient(90deg,var(--accent) 0%,var(--accent-2) 100%);}
   a{ color:inherit; }
   .mono{ font-family:'JetBrains Mono',monospace; }
   .wrap{ max-width:1040px; margin:0 auto; padding:0 28px; }
   .prose{ max-width:680px; }
-  nav{position:fixed; top:12px; left:50%; transform:translateX(-50%);background:rgba(17,17,34,0.85);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:60px;padding:6px 16px;z-index:1000;transition:all 0.3s ease;box-shadow:0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(124,58,237,0.1);}
-  nav:hover{border-color:var(--border-bright);box-shadow:0 4px 32px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.25);transform:translateX(-50%) translateY(-2px);}
-  [data-theme="light"] nav{background:rgba(255,255,255,0.95);box-shadow:0 4px 20px rgba(0,0,0,0.08), 0 0 0 1px rgba(139,92,246,0.1);}
-  [data-theme="light"] nav:hover{box-shadow:0 4px 28px rgba(0,0,0,0.12), 0 0 40px rgba(139,92,246,0.15);}
+  nav{position:fixed; top:12px; left:50%; transform:translateX(-50%);background:rgba(17,17,34,0.85);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:60px;padding:6px 16px;z-index:1000;transition:all 0.3s ease;box-shadow:0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(220,20,60,0.1);}
+  nav:hover{border-color:var(--border-bright);box-shadow:0 4px 32px rgba(0,0,0,0.5), 0 0 40px rgba(220,20,60,0.25);transform:translateX(-50%) translateY(-2px);}
+  [data-theme="light"] nav{background:rgba(255,255,255,0.95);box-shadow:0 4px 20px rgba(0,0,0,0.08), 0 0 0 1px rgba(220,20,60,0.1);}
+  [data-theme="light"] nav:hover{box-shadow:0 4px 28px rgba(0,0,0,0.12), 0 0 40px rgba(220,20,60,0.15);}
   nav .wrap{display:flex; align-items:center; gap:2px;max-width:none; padding:0;}
   .nav-links{ display:flex; gap:2px; list-style:none; align-items:center; }
   .nav-links a{font-size:12px; color:var(--muted); text-decoration:none;font-weight:500; padding:5px 12px; border-radius:25px;transition:all 0.25s ease;}
-  .nav-links a:hover, .nav-links a.active{background:linear-gradient(135deg,#7c3aed 0%,#a78bfa 50%,#06b6d4 100%);color:white;box-shadow:0 4px 16px rgba(124,58,237,0.35);}
-  [data-theme="light"] .nav-links a:hover, [data-theme="light"] .nav-links a.active{background:linear-gradient(135deg,#8b5cf6 0%,#a78bfa 50%,#06b6d4 100%);}
+  .nav-links a:hover, .nav-links a.active{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 100%);color:white;box-shadow:0 4px 16px var(--accent-glow);}
+  [data-theme="light"] .nav-links a:hover, [data-theme="light"] .nav-links a.active{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 100%);}
   .brand{font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600;text-decoration:none; color:var(--text); padding:5px 12px;border-radius:25px; transition:all 0.25s ease;}
-  .brand:hover{background:linear-gradient(135deg,#7c3aed 0%,#a78bfa 50%,#06b6d4 100%);color:white;}
-  .theme-toggle{position:fixed; top:12px; right:24px; z-index:1000;width:46px; height:46px; border-radius:50%;background:rgba(17,17,34,0.85);backdrop-filter:blur(24px);border:1px solid var(--border);color:var(--text); cursor:pointer;display:flex; align-items:center; justify-content:center;transition:all 0.3s ease;box-shadow:0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(124,58,237,0.1);}
-  .theme-toggle:hover{transform:translateY(-2px) rotate(15deg);border-color:var(--border-bright);box-shadow:0 4px 32px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.25);}
+  .brand:hover{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 100%);color:white;}
+  .theme-toggle{position:fixed; top:12px; right:24px; z-index:1000;width:46px; height:46px; border-radius:50%;background:rgba(17,17,34,0.85);backdrop-filter:blur(24px);border:1px solid var(--border);color:var(--text); cursor:pointer;display:flex; align-items:center; justify-content:center;transition:all 0.3s ease;box-shadow:0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(220,20,60,0.1);}
+  .theme-toggle:hover{transform:translateY(-2px) rotate(15deg);border-color:var(--border-bright);box-shadow:0 4px 32px rgba(0,0,0,0.5), 0 0 40px rgba(220,20,60,0.25);}
   .theme-toggle i{font-size:18px; color:var(--muted); transition:all 0.3s ease;}
-  .theme-toggle:hover i{ color:#a78bfa; }
-  [data-theme="light"] .theme-toggle{background:rgba(255,255,255,0.95);box-shadow:0 4px 20px rgba(0,0,0,0.1), 0 0 0 1px rgba(139,92,246,0.1);}
-  [data-theme="light"] .theme-toggle:hover{box-shadow:0 4px 28px rgba(0,0,0,0.15), 0 0 40px rgba(139,92,246,0.15);}
+  .theme-toggle:hover i{ color:var(--accent-2); }
+  [data-theme="light"] .theme-toggle{background:rgba(255,255,255,0.95);box-shadow:0 4px 20px rgba(0,0,0,0.1), 0 0 0 1px rgba(220,20,60,0.1);}
+  [data-theme="light"] .theme-toggle:hover{box-shadow:0 4px 28px rgba(0,0,0,0.15), 0 0 40px rgba(220,20,60,0.15);}
   .theme-toggle .fa-sun{ display:block; }
   .theme-toggle .fa-moon{ display:none; }
   [data-theme="light"] .theme-toggle .fa-sun{ display:none; }
@@ -83,20 +109,88 @@
   footer .back{ font-size:13px; color:var(--muted); text-decoration:none; }
   footer .back:hover{ color:var(--text); }
   footer .copyright{ font-size:12px; color:var(--muted); }
+  
+  /* Screenshots Section */
+  .screenshot-section{margin:48px 0;}
+  .screenshot-item{margin-bottom:56px;}
+  .screenshot-item:last-child{margin-bottom:0;}
+  .screenshot-frame{
+    border-radius:12px; overflow:hidden; border:1px solid var(--border);
+    box-shadow:0 20px 60px rgba(0,0,0,0.4); margin-bottom:20px;
+    transition:border-color var(--dur), transform var(--dur);
+  }
+  .screenshot-item:hover .screenshot-frame{
+    border-color:var(--accent);
+    transform:translateY(-4px);
+  }
+  .screenshot-frame img{width:100%; display:block;}
+  .screenshot-title{
+    font-family:'Space Grotesk',sans-serif; font-size:20px;
+    font-weight:600; margin-bottom:10px; color:var(--accent-2);
+  }
+  .screenshot-desc{font-size:15px; color:var(--muted); line-height:1.6;}
+  
   @media (max-width:768px){nav{ top:20px; padding:4px 10px; }.nav-links{ gap:0; }.nav-links a, .brand{ font-size:11px; padding:4px 8px; }.theme-toggle{ top:20px; right:20px; width:48px; height:48px; }.breadcrumb{ padding:96px 0 0; }}
 </style>
 </head>
-<body>
+<body data-accent="bizzbridge">
 <div class="scroll-progress-indicator"><div class="scroll-progress-bar" id="scrollProgressBar"></div></div>
 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></button>
-<nav class="navbar"><ul class="nav-menu"><li><a href="../index.html#hero" class="nav-link">Home</a></li><li><a href="../index.html#mobile-portfolio" class="nav-link">Work</a></li><li><a href="../projects.html" class="nav-link">Projects</a></li><li><a href="../index.html#about" class="nav-link">About</a></li><li><a href="../index.html#contact" class="nav-link">Contact</a></li><li><a href="https://drive.google.com/drive/folders/1_PRJsUyyVbCnhK2Y_D75CgdQ4Yf0Y7KM" class="nav-link nav-resume" target="_blank" rel="noopener">Resume <i class="fas fa-download"></i></a></li></ul></nav>
+<!-- Navigation loaded dynamically -->
 <div class="wrap"><div class="breadcrumb"><a href="../index.html">Home</a><span class="sep">/</span> BIZZBRIDGE</div></div>
-<header class="hero"><div class="wrap"><div class="kicker">Case Study — Web / Marketplace</div><h1 class="title">BIZZBRIDGE</h1><p class="tagline">Nigeria has incredible artisans—carpenters, tailors, plumbers, designers—but finding them feels impossible. BIZZBRIDGE connects skilled craftspeople directly with customers who need their work.</p><div class="cta-row"><a class="btn btn-primary" href="https://biz-bridge-marketplace.vercel.app/" target="_blank" rel="noopener">View Live Site →</a><a class="btn btn-ghost" href="https://github.com/otikanelson/Biz-Bridge-Marketplace" target="_blank" rel="noopener">GitHub</a></div><div style="margin-top:48px;"><div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow:0 20px 60px rgba(0,0,0,0.3);"><img src="../images/BizBridge_1.png" alt="BIZZBRIDGE Platform" style="width:100%; display:block;"></div></div></div></header>
+<header class="hero"><div class="wrap"><div class="kicker">Case Study — Web / Marketplace</div><h1 class="title">BIZZBRIDGE</h1><p class="tagline">Nigeria has incredible artisans—carpenters, tailors, plumbers, designers—but finding them feels impossible. BIZZBRIDGE connects skilled craftspeople directly with customers who need their work.</p><div class="cta-row"><a class="btn btn-primary" href="https://biz-bridge-marketplace.vercel.app/" target="_blank" rel="noopener">View Live Site →</a><a class="btn btn-ghost" href="https://github.com/otikanelson/Biz-Bridge-Marketplace" target="_blank" rel="noopener">GitHub</a></div></div></header>
+
+<section id="walkthrough"><div class="wrap"><div class="eyebrow">Platform Walkthrough</div><h2>From discovery to booking — the complete flow</h2><div class="prose"><p>Every screen is designed to help customers find the right artisan fast, and help artisans showcase their best work without the clutter.</p></div>
+
+<div class="screenshot-section">
+  <div class="screenshot-item">
+    <div class="screenshot-frame">
+      <img src="../images/BizBridge_1.png" alt="BizBridge Homepage with artisan discovery interface">
+    </div>
+    <h3 class="screenshot-title">01. Homepage — Discover Nigeria's finest artisans</h3>
+    <p class="screenshot-desc">The landing page sets the tone: a bold hero banner highlighting the platform's promise—trusted by 1,000+ artisans across Lagos. The navigation bar offers category filters (woodworking, metalworks, embroidery, etc.), a search bar for quick lookups, and location-based filtering. The "Sell Your Crafts" CTA invites artisans to join the marketplace, while featured categories guide users directly to popular services.</p>
+  </div>
+
+  <div class="screenshot-item">
+    <div class="screenshot-frame">
+      <img src="../images/BizBridge_2.png" alt="BizBridge category browsing and artisan listings">
+    </div>
+    <h3 class="screenshot-title">02. Browse by category — Find exactly what you need</h3>
+    <p class="screenshot-desc">Users can filter by 26+ craft categories—from carpentry to tailoring, plumbing to graphic design. Each category card shows the number of available artisans, making it easy to see which skills are well-represented. The grid layout with clear icons helps users scan quickly, while the persistent search bar allows refinement by location, price range, or rating. This screen bridges the gap between "I need something made" and "Here's who can make it."</p>
+  </div>
+
+  <div class="screenshot-item">
+    <div class="screenshot-frame">
+      <img src="../images/BizBridge_3.png" alt="BizBridge artisan profile page with portfolio and reviews">
+    </div>
+    <h3 class="screenshot-title">03. Artisan profile — See their work before you book</h3>
+    <p class="screenshot-desc">Every artisan has a detailed profile showcasing their portfolio, verified reviews, pricing, and availability. Customers can browse past projects, read testimonials from previous clients, and see ratings broken down by quality, communication, and timeliness. The "Contact Artisan" button opens a direct messaging interface, and the "Book Service" option initiates the scheduling flow. This profile acts as a digital storefront—proving credibility before money changes hands.</p>
+  </div>
+
+  <div class="screenshot-item">
+    <div class="screenshot-frame">
+      <img src="../images/BizBridge_4.png" alt="BizBridge booking and scheduling interface">
+    </div>
+    <h3 class="screenshot-title">04. Booking flow — Schedule, confirm, done</h3>
+    <p class="screenshot-desc">The booking screen simplifies the process: pick a date, specify project details, confirm pricing, and submit. The artisan receives the request, can accept or propose changes, and once confirmed, both parties get calendar reminders. No more back-and-forth over WhatsApp trying to nail down a time—everything happens on-platform. Payment can be processed upfront or upon completion, depending on the agreement, and all transaction history is tracked for transparency.</p>
+  </div>
+
+  <div class="screenshot-item">
+    <div class="screenshot-frame">
+      <img src="../images/BizBridge_5.png" alt="BizBridge artisan dashboard for managing services">
+    </div>
+    <h3 class="screenshot-title">05. Artisan dashboard — Manage your business</h3>
+    <p class="screenshot-desc">Artisans get a full business management dashboard: view booking requests, update availability, manage their portfolio, respond to messages, and track earnings. The dashboard shows metrics like total jobs completed, average rating, and monthly revenue. Artisans can upload new work samples, adjust pricing for different services, and mark themselves as unavailable during busy periods. It's a control center that turns scattered gigs into a trackable, scalable business.</p>
+  </div>
+</div>
+
+</div></section>
 <section id="problem"><div class="wrap"><div class="eyebrow">The Problem</div><h2>Skilled artisans are invisible</h2><div class="prose"><p>Nigeria is full of talented craftspeople, but there's no reliable way to find them. Word of mouth only goes so far. Social media is scattered. Directory listings are outdated. Good work goes undiscovered because there's no platform connecting artisans with customers.</p></div></div></section>
 <section id="solution"><div class="wrap"><div class="eyebrow">The Solution</div><h2>A marketplace that actually works</h2><div class="prose"><p>BIZZBRIDGE is a full-stack marketplace connecting artisans with customers across 26+ craft categories. Search by skill, location, or specialty. View portfolios, read reviews, book services instantly. Support local talent with a platform that actually understands the Nigerian context.</p><p>Built with React, Node.js, MongoDB, and Express—a complete MERN stack solution with real-time messaging, booking management, and payment processing.</p></div><div class="features-grid"><div class="feature-card"><div class="icon"><i class="fas fa-search"></i></div><h4>Advanced Search</h4><p>Find artisans by skill, location, price range, rating, and availability.</p></div><div class="feature-card"><div class="icon"><i class="fas fa-briefcase"></i></div><h4>26+ Categories</h4><p>From carpentry to tailoring, plumbing to graphic design—every craft is represented.</p></div><div class="feature-card"><div class="icon"><i class="fas fa-calendar-check"></i></div><h4>Instant Booking</h4><p>Book services directly through the platform with scheduling and confirmation.</p></div><div class="feature-card"><div class="icon"><i class="fas fa-star"></i></div><h4>Reviews & Ratings</h4><p>See verified reviews from real customers before hiring.</p></div><div class="feature-card"><div class="icon"><i class="fas fa-user-circle"></i></div><h4>Artisan Profiles</h4><p>Detailed portfolios showcasing past work, skills, and customer testimonials.</p></div><div class="feature-card"><div class="icon"><i class="fas fa-comments"></i></div><h4>Direct Messaging</h4><p>Communicate with artisans directly to discuss project requirements and pricing.</p></div></div></div></section>
 <section id="impact"><div class="wrap"><div class="eyebrow">Philosophy</div><blockquote class="quote">Good work deserves to be seen. Skilled artisans shouldn't stay invisible just because there's no platform connecting them to customers who need their expertise.</blockquote><div class="prose" style="margin-top:24px;"><p>BIZZBRIDGE is live—a working marketplace that proves local talent can thrive when given the right infrastructure.</p></div></div></section>
 <section id="meta"><div class="wrap"><div class="eyebrow">Project Details</div><div class="meta-card"><div class="meta-row"><div class="k">TYPE</div><div class="v">Web Marketplace</div></div><div class="meta-row"><div class="k">ROLE</div><div class="v">Full-Stack Developer</div></div><div class="meta-row"><div class="k">TECHNOLOGY</div><div class="v">React · Node.js · MongoDB · Express</div></div><div class="meta-row"><div class="k">CATEGORIES</div><div class="v">26+ Craft Specialties</div></div><div class="meta-row"><div class="k">STATUS</div><div class="v">Live & Deployed</div></div><div class="meta-row"><div class="k">LIVE SITE</div><div class="v"><a href="https://biz-bridge-marketplace.vercel.app/" target="_blank" rel="noopener">biz-bridge-marketplace.vercel.app ↗</a></div></div><div class="meta-row"><div class="k">SOURCE</div><div class="v"><a href="https://github.com/otikanelson/Biz-Bridge-Marketplace" target="_blank" rel="noopener">github.com/otikanelson/Biz-Bridge-Marketplace ↗</a></div></div></div></div></section>
 <footer><div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; width:100%;"><a class="back" href="../projects.html">← Back to all projects</a><span class="copyright">© 2026 Nelson Otika. All rights reserved.</span></div></footer>
 <script>(function(){const toggle = document.getElementById('themeToggle');const savedTheme = localStorage.getItem('theme') || 'dark';document.documentElement.setAttribute('data-theme', savedTheme);toggle.addEventListener('click', () => {const current = document.documentElement.getAttribute('data-theme');const next = current === 'dark' ? 'light' : 'dark';document.documentElement.setAttribute('data-theme', next);localStorage.setItem('theme', next);});})();(function(){const bar = document.getElementById('scrollProgressBar');window.addEventListener('scroll', () => {const h = document.documentElement.scrollHeight - window.innerHeight;const p = (window.scrollY / h) * 100;bar.style.width = p + '%';});})();</script>
+<script src="../js/case-study-nav.js"></script>
 </body>
 </html>

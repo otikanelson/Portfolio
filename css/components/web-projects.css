@@ -120,7 +120,8 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
-.web-tile-logo {
+/* Small badge shown on the un-hovered tile, top-left of the preview image */
+.web-tile-logo-badge {
     position: absolute;
     top: 14px;
     left: 14px;
@@ -132,25 +133,43 @@
     background: var(--dark-surface);
     z-index: 10;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease;
 }
 
-.web-tile.expanded .web-tile-logo,
-.web-tile.active .web-tile-logo,
-.web-tile:hover .web-tile-logo {
-    animation: slideLogoDown 1.2s ease forwards;
+.web-tile.expanded .web-tile-logo-badge,
+.web-tile.active .web-tile-logo-badge,
+.web-tile:hover .web-tile-logo-badge {
+    opacity: 0;
 }
 
-@keyframes slideLogoDown {
-    from {
-        top: 14px;
-        width: 44px;
-        height: 44px;
-    }
-    to {
-        top: 245px;
-        width: 44px;
-        height: 44px;
-    }
+/* Header row inside the info panel — logo sits in flow next to the title,
+   so it always aligns regardless of how many lines the description wraps to */
+.web-tile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.web-tile-logo-inline {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    background: var(--dark-surface);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
+    opacity: 0;
+    /* transform/transition during the slide is driven by JS (FLIP),
+       since the true landing position depends on measured layout, not
+       a value CSS can know in advance. This is just the resting state. */
+}
+
+.web-tile.expanded .web-tile-logo-inline,
+.web-tile.active .web-tile-logo-inline,
+.web-tile:hover .web-tile-logo-inline {
+    opacity: 1;
 }
 
 .web-tile-label {
@@ -215,8 +234,7 @@
     font-size: 1.2rem;
     font-weight: 700;
     color: #ffffff !important;
-    margin-bottom: 6px;
-    margin-left: 46px;
+    margin: 0;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
     white-space: normal;
     clip-path: inset(0 100% 0 0);
@@ -348,10 +366,20 @@
         position: relative !important;
     }
 
-    .web-tile-logo,
+    .web-tile-logo-badge,
     .web-tile-label,
     .web-tile::after {
         display: none !important;
+    }
+
+    .web-tile-header {
+        margin-bottom: 8px !important;
+    }
+
+    .web-tile-logo-inline {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
     }
 
     .web-tile-info {

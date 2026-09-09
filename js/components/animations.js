@@ -198,9 +198,65 @@ export function initWebTileAccordion() {
     const tiles = Array.from(stage.querySelectorAll('.web-tile'));
     if (!tiles.length) return;
 
+    // FLIP animation: slide the logo from the corner badge to its real
+    // spot next to the title. The title's position depends on how many
+    // lines the description wraps to, so we measure it after layout
+    // settles instead of animating toward a guessed pixel value.
+    function slideLogoIn(tile) {
+        const badge = tile.querySelector('.web-tile-logo-badge');
+        const inline = tile.querySelector('.web-tile-logo-inline');
+        if (!badge || !inline) return;
+
+        const badgeRect = badge.getBoundingClientRect();
+        const inlineRect = inline.getBoundingClientRect();
+        if (!inlineRect.width) return; // not visible/laid out yet
+
+        const dx = badgeRect.left - inlineRect.left;
+        const dy = badgeRect.top - inlineRect.top;
+        const scale = badgeRect.width / inlineRect.width;
+
+        // Snap the logo to the badge's position with no transition...
+        inline.style.transition = 'none';
+        inline.style.opacity = '1';
+        inline.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+
+        // ...force the browser to commit that as the start frame...
+        void inline.offsetWidth;
+
+        // ...then transition to its true, measured position.
+        inline.style.transition = 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+        inline.style.transform = 'translate(0, 0) scale(1)';
+
+        inline.addEventListener('transitionend', function cleanup(e) {
+            if (e.propertyName !== 'transform') return;
+            inline.style.transition = '';
+            inline.style.transform = '';
+            inline.removeEventListener('transitionend', cleanup);
+        });
+    }
+
+    function resetLogo(tile) {
+        const inline = tile.querySelector('.web-tile-logo-inline');
+        if (!inline) return;
+        inline.style.transition = '';
+        inline.style.opacity = '';
+        inline.style.transform = '';
+    }
+
     function expand(tile) {
-        tiles.forEach(t => t.classList.remove('expanded'));
+        tiles.forEach(t => {
+            if (t !== tile) {
+                t.classList.remove('expanded');
+                resetLogo(t);
+            }
+        });
         tile.classList.add('expanded');
+
+        // Wait for the tile's width transition (0.45s) to finish so the
+        // description has reflowed and the title sits at its true final
+        // position, then slide the logo to match it exactly.
+        clearTimeout(tile._logoSlideTimer);
+        tile._logoSlideTimer = setTimeout(() => slideLogoIn(tile), 460);
     }
 
     tiles.forEach(tile => {

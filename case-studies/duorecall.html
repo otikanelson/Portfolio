@@ -9,26 +9,28 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/components/case-study-nav.css">
 <style>
+  /* DuoRecall - Green Theme - Updated 2026 */
   :root{
-    --bg:#0a0a14;
-    --surface:#16162a;
-    --surface-2:#1e1e38;
-    --border:rgba(124,58,237,0.2);
-    --border-bright:rgba(124,58,237,0.5);
-    --text:#f1f0ff;
+    --bg:#0a0f0d;
+    --surface:#0f1714;
+    --surface-2:#14201b;
+    --border:rgba(16,185,129,0.2);
+    --border-bright:rgba(16,185,129,0.5);
+    --text:#f0fdf4;
     --muted:#9ca3af;
     --accent:#10b981;
     --accent-glow:rgba(16,185,129,0.25);
     --dur:420ms;
   }
   [data-theme="light"] {
-    --bg:#f8fafc;
-    --surface:#ffffff;
-    --surface-2:#f1f5f9;
-    --border:rgba(139,92,246,0.15);
-    --border-bright:rgba(139,92,246,0.35);
-    --text:#0f172a;
+    --bg:#ffffff;
+    --surface:#f0fdf4;
+    --surface-2:#dcfce7;
+    --border:rgba(16,185,129,0.2);
+    --border-bright:rgba(16,185,129,0.4);
+    --text:#064e3b;
     --muted:#475569;
     --accent:#10b981;
     --accent-glow:rgba(16,185,129,0.15);
@@ -48,10 +50,10 @@
 
   .scroll-progress-indicator{
     position:fixed; top:0; left:0; right:0; height:4px;
-    background:rgba(124,58,237,0.1); z-index:1001;
+    background:rgba(16,185,129,0.1); z-index:1001;
   }
   .scroll-progress-bar{
-    height:100%; background:linear-gradient(135deg,#7c3aed 0%,#10b981 100%);
+    height:100%; background:linear-gradient(135deg,#10b981 0%,#34d399 100%);
     transition:width 0.1s ease;
     box-shadow:0 0 10px rgba(16,185,129,0.5);
   }
@@ -71,7 +73,7 @@
   /* ---------- NAV ---------- */
   .navbar{
     position:fixed; top:16px; left:50%; transform:translateX(-50%);
-    background:rgba(22,22,42,0.85);
+    background:rgba(15,23,20,0.85);
     backdrop-filter:blur(20px);
     border:1px solid var(--border);
     border-radius:60px;
@@ -81,8 +83,8 @@
     box-shadow:0 8px 32px rgba(0,0,0,0.3);
   }
   [data-theme="light"] .navbar{
-    background:rgba(255,255,255,0.85);
-    box-shadow:0 4px 20px rgba(0,0,0,0.06);
+    background:rgba(240,253,244,0.95);
+    box-shadow:0 4px 20px rgba(16,185,129,0.1);
   }
   .nav-menu{ display:flex; gap:4px; list-style:none; align-items:center; }
   .nav-link{
@@ -91,16 +93,32 @@
     transition:all 0.25s ease;
   }
   .nav-link:hover, .nav-link.active{
-    background:var(--accent);
-    color:white;
+    background:#10b981 !important;
+    color:white !important;
   }
   .nav-resume{
-    background:rgba(16,185,129,0.15);
-    border:1px solid rgba(16,185,129,0.3);
-    color:var(--accent) !important;
+    background:rgba(16,185,129,0.15) !important;
+    border:1px solid rgba(16,185,129,0.3) !important;
+    color:#10b981 !important;
   }
   .nav-resume:hover{
-    background:var(--accent) !important;
+    background:#10b981 !important;
+    color:white !important;
+  }
+  
+  /* Override external nav styles */
+  .case-study-navbar .nav-link:hover,
+  .case-study-navbar .nav-link.active {
+    background:#10b981 !important;
+    color:white !important;
+  }
+  .case-study-navbar .nav-resume {
+    background:rgba(16,185,129,0.15) !important;
+    border:1px solid rgba(16,185,129,0.3) !important;
+    color:#10b981 !important;
+  }
+  .case-study-navbar .nav-resume:hover {
+    background:#10b981 !important;
     color:white !important;
   }
 
@@ -129,10 +147,10 @@
   .hero{ padding:32px 0 40px; }
   .kicker{
     font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:16px;
+    color:#10b981; display:flex; align-items:center; gap:10px; margin-bottom:16px;
   }
   .kicker::before{
-    content:''; width:24px; height:2px; background:var(--accent);
+    content:''; width:24px; height:2px; background:#10b981;
   }
   h1.title{
     font-family:'Space Grotesk',sans-serif;
@@ -210,7 +228,7 @@
   section{ padding:64px 0; border-top:1px solid var(--border); }
   .eyebrow{
     font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;
-    color:var(--accent); letter-spacing:.1em; text-transform:uppercase;
+    color:#10b981 !important; letter-spacing:.1em; text-transform:uppercase;
     margin-bottom:12px;
   }
   h2{
@@ -274,7 +292,7 @@
   }
 </style>
 </head>
-<body>
+<body data-accent="duorecall">
 
 <div class="scroll-progress-indicator">
   <div class="scroll-progress-bar" id="scrollProgressBar"></div>
@@ -285,22 +303,11 @@
   <i class="fas fa-moon"></i>
 </button>
 
-<nav class="navbar">
-  <ul class="nav-menu">
-    <li><a href="../index.html#hero" class="nav-link">Home</a></li>
-    <li><a href="../index.html#mobile-portfolio" class="nav-link">Work</a></li>
-    <li><a href="../projects.html" class="nav-link">Projects</a></li>
-    <li><a href="../index.html#about" class="nav-link">About</a></li>
-    <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1_PRJsUyyVbCnhK2Y_D75CgdQ4Yf0Y7KM" class="nav-link nav-resume" target="_blank" rel="noopener">Resume <i class="fas fa-download"></i></a></li>
-  </ul>
-</nav>
+<!-- Navigation loaded dynamically -->
 
 <div class="wrap">
   <div class="breadcrumb">
     <a href="../index.html">Home</a>
-    <span class="sep">/</span>
-    <a href="../projects.html">Projects</a>
     <span class="sep">/</span> DUO Recall
   </div>
 </div>
@@ -332,7 +339,7 @@
       <!-- Screenshot 1 -->
       <div class="gallery-card">
         <div class="gallery-img-wrapper">
-          <img src="../images/DuoRecall_1.jpeg" alt="DUO Recall Deck Collection Screen" loading="lazy" onerror="this.src='https://via.placeholder.com/280x500/16162a/10b981?text=Deck+Management+UI'">
+          <img src="../images/DuoRecall_1.jpeg" alt="DUO Recall Deck Collection Screen" loading="lazy" onerror="this.src='https://via.placeholder.com/280x500/0f1714/10b981?text=Deck+Management+UI'">
         </div>
         <div class="gallery-caption">
           <h4>Custom Deck Management</h4>
@@ -343,7 +350,7 @@
       <!-- Screenshot 2 -->
       <div class="gallery-card">
         <div class="gallery-img-wrapper">
-          <img src="../images/DuoRecall_2.jpeg" alt="DUO Recall Flip Card Quiz Interface" loading="lazy" onerror="this.src='https://via.placeholder.com/280x500/16162a/10b981?text=Interactive+Quiz+UI'">
+          <img src="../images/DuoRecall_2.jpeg" alt="DUO Recall Flip Card Quiz Interface" loading="lazy" onerror="this.src='https://via.placeholder.com/280x500/0f1714/10b981?text=Interactive+Quiz+UI'">
         </div>
         <div class="gallery-caption">
           <h4>Interactive Study Sessions</h4>
@@ -354,7 +361,7 @@
       <!-- Screenshot 3 -->
       <div class="gallery-card">
         <div class="gallery-img-wrapper">
-          <img src="../images/DuoRecall_3.jpeg" alt="DUO Recall CSV Import and Analytics" loading="lazy" onerror="this.src='https://via.placeholder.com/280x500/16162a/10b981?text=CSV+Import+%26+Stats'">
+          <img src="../images/DuoRecall_3.jpeg" alt="DUO Recall CSV Import and Analytics" loading="lazy" onerror="this.src='https://via.placeholder.com/280x500/0f1714/10b981?text=CSV+Import+%26+Stats'">
         </div>
         <div class="gallery-caption">
           <h4>CSV Sync & Analytics</h4>
@@ -453,7 +460,6 @@
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; width:100%;">
-    <a class="back" href="../projects.html">← Back to all projects</a>
     <span class="copyright">© 2026 Nelson Otika. All rights reserved.</span>
   </div>
 </footer>
@@ -482,5 +488,6 @@
   })();
 </script>
 
+<script src="../js/case-study-nav.js"></script>
 </body>
 </html>

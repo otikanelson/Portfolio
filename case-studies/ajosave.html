@@ -9,34 +9,36 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/components/case-study-nav.css">
 <style>
+  /* AjoSave - Blue Theme - Updated 2026 */
   :root{
-    --bg:#080b11;
-    --surface:#111827;
-    --surface-2:#1f2937;
-    --border:rgba(16,185,129,0.2);
-    --border-bright:rgba(16,185,129,0.5);
-    --text:#f3f4f6;
+    --bg:#0a0f1a;
+    --surface:#0f1729;
+    --surface-2:#1e2942;
+    --border:rgba(59,130,246,0.2);
+    --border-bright:rgba(59,130,246,0.5);
+    --text:#eff6ff;
     --muted:#9ca3af;
-    --accent:#10b981;
-    --accent-secondary:#0ea5e9;
-    --accent-glow:rgba(16,185,129,0.25);
+    --accent:#3b82f6;
+    --accent-secondary:#60a5fa;
+    --accent-glow:rgba(59,130,246,0.25);
     --level-1:#eab308;
     --level-2:#f97316;
     --level-3:#ef4444;
     --dur:420ms;
   }
   [data-theme="light"] {
-    --bg:#f8fafc;
-    --surface:#ffffff;
-    --surface-2:#f1f5f9;
-    --border:rgba(16,185,129,0.2);
-    --border-bright:rgba(16,185,129,0.4);
-    --text:#0f172a;
+    --bg:#ffffff;
+    --surface:#eff6ff;
+    --surface-2:#dbeafe;
+    --border:rgba(59,130,246,0.2);
+    --border-bright:rgba(59,130,246,0.4);
+    --text:#1e3a8a;
     --muted:#475569;
-    --accent:#059669;
-    --accent-secondary:#0284c7;
-    --accent-glow:rgba(5,150,105,0.15);
+    --accent:#3b82f6;
+    --accent-secondary:#60a5fa;
+    --accent-glow:rgba(59,130,246,0.15);
     --level-1:#ca8a04;
     --level-2:#ea580c;
     --level-3:#dc2626;
@@ -56,12 +58,12 @@
 
   .scroll-progress-indicator{
     position:fixed; top:0; left:0; right:0; height:4px;
-    background:rgba(16,185,129,0.1); z-index:1001;
+    background:rgba(59,130,246,0.1); z-index:1001;
   }
   .scroll-progress-bar{
-    height:100%; background:linear-gradient(90deg, #10b981 0%, #0ea5e9 100%);
+    height:100%; background:linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
     transition:width 0.1s ease;
-    box-shadow:0 0 12px rgba(16,185,129,0.6);
+    box-shadow:0 0 12px rgba(59,130,246,0.6);
   }
 
   a{ color:inherit; text-decoration:none; }
@@ -77,7 +79,7 @@
 
   .navbar{
     position:fixed; top:16px; left:50%; transform:translateX(-50%);
-    background:rgba(17,24,39,0.85);
+    background:rgba(15,23,42,0.85);
     backdrop-filter:blur(20px);
     border:1px solid var(--border);
     border-radius:60px;
@@ -87,8 +89,8 @@
     box-shadow:0 8px 32px rgba(0,0,0,0.4);
   }
   [data-theme="light"] .navbar{
-    background:rgba(255,255,255,0.85);
-    box-shadow:0 4px 20px rgba(0,0,0,0.06);
+    background:rgba(239,246,255,0.95);
+    box-shadow:0 4px 20px rgba(59,130,246,0.1);
   }
   .nav-menu{ display:flex; gap:4px; list-style:none; align-items:center; }
   .nav-link{
@@ -97,16 +99,32 @@
     transition:all 0.25s ease;
   }
   .nav-link:hover, .nav-link.active{
-    background:linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-    color:white;
+    background:linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%) !important;
+    color:white !important;
   }
   .nav-resume{
-    background:rgba(16,185,129,0.15);
-    border:1px solid rgba(16,185,129,0.3);
-    color:var(--accent) !important;
+    background:rgba(59,130,246,0.15) !important;
+    border:1px solid rgba(59,130,246,0.3) !important;
+    color:#3b82f6 !important;
   }
   .nav-resume:hover{
-    background:var(--accent) !important;
+    background:#3b82f6 !important;
+    color:white !important;
+  }
+  
+  /* Override external nav styles */
+  .case-study-navbar .nav-link:hover,
+  .case-study-navbar .nav-link.active {
+    background:linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%) !important;
+    color:white !important;
+  }
+  .case-study-navbar .nav-resume {
+    background:rgba(59,130,246,0.15) !important;
+    border:1px solid rgba(59,130,246,0.3) !important;
+    color:#3b82f6 !important;
+  }
+  .case-study-navbar .nav-resume:hover {
+    background:#3b82f6 !important;
     color:white !important;
   }
 
@@ -136,9 +154,9 @@
 
   .kicker{
     font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:16px;
+    color:#3b82f6; display:flex; align-items:center; gap:10px; margin-bottom:16px;
   }
-  .kicker::before{ content:''; width:24px; height:2px; background:var(--accent); }
+  .kicker::before{ content:''; width:24px; height:2px; background:#3b82f6; }
 
   h1.title{
     font-family:'Space Grotesk',sans-serif;
@@ -149,7 +167,7 @@
     margin-bottom:20px;
   }
   .title-highlight{
-    background:linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
+    background:linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
   }
@@ -161,12 +179,12 @@
   .badge-group{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px; }
   .badge{
     display:inline-flex; align-items:center; gap:8px;
-    padding:8px 16px; background:rgba(16,185,129,0.12);
+    padding:8px 16px; background:rgba(59,130,246,0.12);
     border:1px solid var(--accent); border-radius:20px;
     font-size:13px; font-weight:600; color:var(--accent);
   }
   .badge-secondary{
-    background:rgba(14,165,233,0.12);
+    background:rgba(96,165,250,0.12);
     border-color:var(--accent-secondary);
     color:var(--accent-secondary);
   }
@@ -178,25 +196,21 @@
     text-decoration:none; transition:all var(--dur);
     border:1px solid transparent;
   }
-  .btn-primary{ background:linear-gradient(135deg,#10b981 0%,#0ea5e9 100%); color:#05111e; }
-  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(16,185,129,0.35); }
+  .btn-primary{ background:linear-gradient(135deg,#3b82f6 0%,#60a5fa 100%); color:#ffffff; }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(59,130,246,0.35); }
   .btn-ghost{ border-color:var(--border); color:var(--text); background:var(--surface); }
   .btn-ghost:hover{ border-color:var(--accent); transform:translateY(-2px); }
   .cta-note{ font-size:13px; color:var(--muted); margin-bottom:8px; }
 
-  /* Hero visual */
+  /* Hero Media without extra padding */
   .hero-media{
-    aspect-ratio:3/4; border-radius:20px; overflow:hidden;
-    background:var(--surface); border:1px solid var(--border);
-    position:relative; box-shadow:0 20px 50px rgba(0,0,0,0.35);
+    height:auto; max-height:580px; width:fit-content; margin:0 auto; padding:0;
+    border-radius:20px; overflow:hidden; background:transparent;
+    border:1px solid var(--border); box-shadow:0 20px 50px rgba(0,0,0,0.35);
+    display:flex; align-items:center; justify-content:center;
   }
-  .hero-media img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .hero-media-tag{
-    position:absolute; bottom:14px; left:14px; right:14px;
-    background:rgba(8,11,17,0.75); backdrop-filter:blur(6px);
-    border:1px solid rgba(255,255,255,0.1); border-radius:10px;
-    padding:10px 14px; font-size:12.5px; color:#e5e7eb;
-    font-family:'JetBrains Mono',monospace;
+  .hero-media img{
+    width:auto; height:100%; max-height:580px; object-fit:contain; display:block;
   }
 
   /* Metrics */
@@ -210,32 +224,47 @@
   .metric-val{ font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; color:var(--text); }
   .metric-label{ font-size:11.5px; font-family:'JetBrains Mono',monospace; color:var(--muted); text-transform:uppercase; margin-top:4px; }
 
-  /* Showcase */
+  /* Showcase Section */
   .showcase-section{
     background:linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
     border:1px solid var(--border);
     border-radius:24px; padding:48px 32px; margin:40px 0;
   }
   .showcase-header{ text-align:center; max-width:680px; margin:0 auto 40px; }
-  .showcase-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:28px; }
+  .showcase-grid{ display:flex; justify-content:center; gap:28px; flex-wrap:wrap; }
   .showcase-card{
     background:var(--surface-2); border:1px solid var(--border);
-    border-radius:20px; padding:20px; transition:all var(--dur);
+    border-radius:20px; padding:0; overflow:hidden; transition:all var(--dur);
+    width:fit-content; max-width:100%;
+    display:flex; flex-direction:column;
   }
   .showcase-card:hover{ border-color:var(--accent); transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.3); }
   .media-wrapper{
-    width:100%; aspect-ratio:16/10; border-radius:12px; overflow:hidden;
-    background:var(--bg); border:1px solid var(--border); position:relative; margin-bottom:16px;
+    width:100%; height:auto; border-radius:0; overflow:hidden;
+    background:transparent; border:none; margin:0;
     display:flex; align-items:center; justify-content:center;
+    aspect-ratio: 9/16; /* Mobile aspect ratio */
   }
-  .media-wrapper img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .media-wrapper video, .media-wrapper img{
+    width:100%; height:100%; object-fit:cover;
+    display:block;
+  }
+  .media-wrapper.desktop-video {
+    aspect-ratio: 16/9; /* Desktop aspect ratio */
+  }
+  .media-wrapper.desktop-video video,
+  .media-wrapper.desktop-video img {
+    object-fit:contain;
+  }
+  .showcase-info{ padding:20px; max-width:380px; }
   .showcase-info h4{ font-size:17px; font-weight:600; color:var(--text); margin-bottom:6px; }
   .showcase-info p{ font-size:14px; color:var(--muted); line-height:1.5; }
 
   section{ padding:64px 0; border-top:1px solid var(--border); }
   .eyebrow{
     font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;
-    color:var(--accent); letter-spacing:.1em; text-transform:uppercase; margin-bottom:12px;
+    color:#3b82f6 !important; letter-spacing:.1em; text-transform:uppercase;
+    margin-bottom:12px;
   }
   h2{
     font-family:'Space Grotesk',sans-serif; font-weight:700;
@@ -246,7 +275,7 @@
     margin:8px 0 6px; color:var(--text);
   }
 
-  /* Feature cards (engineering) */
+  /* Feature cards */
   .features-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin-top:32px; }
   .feature-card{
     background:var(--surface); border:1px solid var(--border); border-radius:16px;
@@ -255,14 +284,14 @@
   .feature-card:hover{ border-color:var(--accent); transform:translateY(-3px); }
   .feature-card .icon{
     width:44px; height:44px; border-radius:12px;
-    background:rgba(16,185,129,0.12); color:var(--accent);
+    background:rgba(59,130,246,0.12); color:var(--accent);
     display:flex; align-items:center; justify-content:center;
     font-size:20px; margin-bottom:16px;
   }
   .feature-card h4{ font-size:17px; font-weight:600; margin-bottom:8px; }
   .feature-card p{ font-size:14px; color:var(--muted); line-height:1.6; }
 
-  /* How it works — turn steps */
+  /* Steps */
   .steps-row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin:32px 0; }
   .step-card{
     background:var(--surface); border:1px solid var(--border); border-radius:14px;
@@ -329,11 +358,16 @@
   .phase-card h5{ font-size:15px; font-weight:600; margin-bottom:8px; }
   .phase-card p{ font-size:13px; color:var(--muted); line-height:1.5; }
 
+  /* Inline Screenshots without extra padding */
   .inline-shot{
-    margin:28px 0; border-radius:16px; overflow:hidden; border:1px solid var(--border);
-    aspect-ratio:21/9; background:var(--surface);
+    margin:28px auto; width:fit-content; max-width:100%; border-radius:16px;
+    overflow:hidden; border:1px solid var(--border); background:transparent;
+    padding:0; display:flex; align-items:center; justify-content:center;
   }
-  .inline-shot img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .inline-shot img{
+    width:auto; max-width:100%; height:auto; max-height:520px;
+    display:block; object-fit:contain;
+  }
 
   .quote-box{
     background:var(--surface); border-left:4px solid var(--accent);
@@ -357,7 +391,7 @@
 
   footer{
     border-top:1px solid var(--border); padding:40px 0;
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+    display:flex; justify-between:space-between; align-items:center; flex-wrap:wrap; gap:16px;
   }
   footer .back{ font-size:14px; font-weight:500; color:var(--muted); }
   footer .back:hover{ color:var(--accent); }
@@ -371,7 +405,7 @@
   }
 </style>
 </head>
-<body>
+<body data-accent="ajosave">
 
 <div class="scroll-progress-indicator">
   <div class="scroll-progress-bar" id="scrollProgressBar"></div>
@@ -382,22 +416,11 @@
   <i class="fas fa-moon"></i>
 </button>
 
-<nav class="navbar">
-  <ul class="nav-menu">
-    <li><a href="../index.html#hero" class="nav-link">Home</a></li>
-    <li><a href="../index.html#mobile-portfolio" class="nav-link">Work</a></li>
-    <li><a href="../projects.html" class="nav-link">Projects</a></li>
-    <li><a href="../index.html#about" class="nav-link">About</a></li>
-    <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1_PRJsUyyVbCnhK2Y_D75CgdQ4Yf0Y7KM" class="nav-link nav-resume" target="_blank" rel="noopener">Resume <i class="fas fa-download"></i></a></li>
-  </ul>
-</nav>
+<!-- Navigation loaded dynamically -->
 
 <div class="wrap">
   <div class="breadcrumb">
     <a href="../index.html">Home</a>
-    <span class="sep">/</span>
-    <a href="../projects.html">Projects</a>
     <span class="sep">/</span> AjoSave
   </div>
 </div>
@@ -424,8 +447,7 @@
       </div>
 
       <div class="hero-media">
-        <img src="../images/ajosave-hero-preview.png" alt="AjoSave app preview" loading="lazy" onerror="this.src='https://via.placeholder.com/600x800/111827/10b981?text=App+Preview+%2F+Screen+Recording'">
-        <div class="hero-media-tag">📱 Drop a screenshot, GIF, or short screen recording here</div>
+        <img src="../images/AjoMobile_5.jpeg" alt="AjoSave mobile dashboard home screen" loading="lazy">
       </div>
     </div>
 
@@ -463,7 +485,10 @@
     <div class="showcase-grid">
       <div class="showcase-card">
         <div class="media-wrapper">
-          <img src="../images/ajosave-mobile-preview.png" alt="AjoSave Mobile App Screen" loading="lazy" onerror="this.src='https://via.placeholder.com/600x380/1f2937/10b981?text=Mobile+Wallet+%26+Group+Screens'">
+          <video autoplay muted loop playsinline controls poster="../images/AjoMobile_7.jpeg">
+            <source src="../Ajosavemobiledemo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
         <div class="showcase-info">
           <h4>Mobile — Where Most People Live</h4>
@@ -472,8 +497,11 @@
       </div>
 
       <div class="showcase-card">
-        <div class="media-wrapper">
-          <img src="../images/ajosave-web-preview.png" alt="AjoSave Web Platform Dashboard" loading="lazy" onerror="this.src='https://via.placeholder.com/600x380/1f2937/0ea5e9?text=Web+Dashboard+%26+Group+Reports'">
+        <div class="media-wrapper desktop-video">
+          <video autoplay muted loop playsinline controls poster="../images/Ajosave_3.png">
+            <source src="../Ajosavewebsitedemo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
         <div class="showcase-info">
           <h4>Web — Built for Group Admins</h4>
@@ -506,6 +534,10 @@
       <p>Say five friends start a group: everyone puts in ₦10,000 every month, and each month, the full ₦50,000 pot goes to a different person until everyone's had a turn. Here's what AjoSave does with that:</p>
     </div>
 
+    <div class="inline-shot">
+      <img src="../images/AjoMobile_4.jpeg" alt="Mobile groups screen showing active savings groups" loading="lazy">
+    </div>
+
     <div class="steps-row">
       <div class="step-card">
         <span class="step-num">01</span>
@@ -530,7 +562,11 @@
     </div>
 
     <div class="inline-shot">
-      <img src="../images/ajosave-timeline-preview.png" alt="Group turn timeline screenshot" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x500/111827/10b981?text=Group+Turn+Timeline+Screenshot'">
+      <img src="../images/AjoMobile_6.jpeg" alt="Mobile payment screen for making contributions" loading="lazy">
+    </div>
+
+    <div class="inline-shot">
+      <img src="../images/Ajosave_6.png" alt="Web groups page showing turn timeline and rotation order" loading="lazy">
     </div>
 
     <h3 class="sub-h">Why "already got paid" isn't a loophole</h3>
@@ -547,6 +583,10 @@
         <span class="tag">Locked</span>
         <p>Money you've committed — either contributions you've paid in, or a payout you've received but haven't "earned the right" to touch yet, because you still owe future contributions.</p>
       </div>
+    </div>
+
+    <div class="inline-shot">
+      <img src="../images/AjoMobile_7.jpeg" alt="Mobile wallet screen showing available and locked balance" loading="lazy">
     </div>
 
     <div class="prose">
@@ -591,7 +631,7 @@
     </div>
 
     <div class="inline-shot">
-      <img src="../images/ajosave-status-preview.png" alt="Account status badge screenshot" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x500/1f2937/0ea5e9?text=Account+Status+Screen'">
+      <img src="../images/AjoMobile_5.jpeg" alt="Mobile dashboard showing account status and group activity" loading="lazy">
     </div>
 
     <div class="prose">
@@ -634,7 +674,7 @@
     </div>
 
     <div class="inline-shot">
-      <img src="../images/ajosave-loan-preview.png" alt="Emergency loan approval screenshot" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x500/111827/10b981?text=Emergency+Loan+Approval+Screen'">
+      <img src="../images/Ajosave_5.png" alt="Web payment screen showing emergency loan approval" loading="lazy">
     </div>
   </div>
 </section>
@@ -647,6 +687,10 @@
     <div class="prose">
       <p>Banks decide who gets credit using salary slips and account history — which locks out most of the people who actually keep Ajo running: market traders, artisans, drivers. AjoSave builds a different kind of file, quietly, in the background: every on-time contribution, every completed group, every emergency loan repaid without issue, all rolled into one score.</p>
       <p>Over time, that score becomes something a bank never gave these users a chance to build — a real, evidence-backed answer to "can this person be trusted with money?" It's the foundation the roadmap's future lending features are built on.</p>
+    </div>
+
+    <div class="inline-shot">
+      <img src="../images/Ajosave_3.png" alt="Web dashboard showing user credit score and financial reputation" loading="lazy">
     </div>
   </div>
 </section>
@@ -762,7 +806,6 @@
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; width:100%;">
-    <a class="back" href="../projects.html">← Back to all projects</a>
     <span class="copyright">© 2026 Nelson Otika. All rights reserved.</span>
   </div>
 </footer>
@@ -791,5 +834,6 @@
   })();
 </script>
 
+<script src="../js/case-study-nav.js"></script>
 </body>
 </html>

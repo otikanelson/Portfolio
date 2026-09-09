@@ -9,28 +9,29 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/components/case-study-nav.css">
 <style>
   :root{
     --bg:#0a0a14;
     --surface:#16162a;
     --surface-2:#1e1e38;
-    --border:rgba(124,58,237,0.2);
-    --border-bright:rgba(124,58,237,0.5);
+    --border:rgba(34,197,94,0.2);
+    --border-bright:rgba(34,197,94,0.5);
     --text:#f1f0ff;
     --muted:#8b8aaa;
-    --accent:#06b6d4;
-    --accent-soft:rgba(6,182,212,.14);
+    --accent:#22c55e;
+    --accent-soft:rgba(34,197,94,.14);
     --dur:420ms;
   }
   [data-theme="light"] {
     --bg:#fafafa;
     --surface:#ede9fe;
     --surface-2:#ddd6fe;
-    --border:rgba(139,92,246,0.15);
-    --border-bright:rgba(139,92,246,0.35);
+    --border:rgba(34,197,94,0.15);
+    --border-bright:rgba(34,197,94,0.35);
     --text:#0f172a;
     --muted:#475569;
-    --accent:#06b6d4;
+    --accent:#22c55e;
   }
   @media (prefers-reduced-motion:reduce){ :root{ --dur:0ms; } }
 
@@ -49,15 +50,15 @@
     background:rgba(124,58,237,0.1); z-index:1001;
   }
   .scroll-progress-bar{
-    height:100%; background:linear-gradient(135deg,#7c3aed 0%,#a78bfa 50%,#06b6d4 100%);
+    height:100%; background:linear-gradient(135deg,#22c55e 0%,#4ade80 50%,#10b981 100%);
     transition:width 0.1s ease;
-    box-shadow:0 0 10px rgba(124,58,237,0.5);
+    box-shadow:0 0 10px rgba(34,197,94,0.5);
   }
   [data-theme="light"] .scroll-progress-indicator{
-    background:rgba(139,92,246,0.08);
+    background:rgba(34,197,94,0.08);
   }
   [data-theme="light"] .scroll-progress-bar{
-    background:linear-gradient(135deg,#8b5cf6 0%,#a78bfa 50%,#06b6d4 100%);
+    background:linear-gradient(135deg,#22c55e 0%,#4ade80 50%,#10b981 100%);
   }
   a{ color:inherit; }
   .mono{ font-family:'JetBrains Mono',monospace; }
@@ -77,15 +78,15 @@
   }
   nav:hover{
     border-color:var(--border-bright);
-    box-shadow:0 4px 32px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.25);
+    box-shadow:0 4px 32px rgba(0,0,0,0.5), 0 0 40px rgba(34,197,94,0.25);
     transform:translateX(-50%) translateY(-2px);
   }
   [data-theme="light"] nav{
     background:rgba(255,255,255,0.95);
-    box-shadow:0 4px 20px rgba(0,0,0,0.08), 0 0 0 1px rgba(139,92,246,0.1);
+    box-shadow:0 4px 20px rgba(0,0,0,0.08), 0 0 0 1px rgba(34,197,94,0.1);
   }
   [data-theme="light"] nav:hover{
-    box-shadow:0 4px 28px rgba(0,0,0,0.12), 0 0 40px rgba(139,92,246,0.15);
+    box-shadow:0 4px 28px rgba(0,0,0,0.12), 0 0 40px rgba(34,197,94,0.15);
   }
   nav .wrap{
     display:flex; align-items:center; gap:2px;
@@ -98,12 +99,12 @@
     transition:all 0.25s ease;
   }
   .nav-links a:hover, .nav-links a.active{
-    background:linear-gradient(135deg,#7c3aed 0%,#a78bfa 50%,#06b6d4 100%);
+    background:linear-gradient(135deg,#22c55e 0%,#4ade80 50%,#10b981 100%);
     color:white;
-    box-shadow:0 4px 16px rgba(124,58,237,0.35);
+    box-shadow:0 4px 16px rgba(34,197,94,0.35);
   }
   [data-theme="light"] .nav-links a:hover, [data-theme="light"] .nav-links a.active{
-    background:linear-gradient(135deg,#8b5cf6 0%,#a78bfa 50%,#06b6d4 100%);
+    background:linear-gradient(135deg,#22c55e 0%,#4ade80 50%,#10b981 100%);
   }
   .brand{
     font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600;
@@ -111,7 +112,7 @@
     border-radius:25px; transition:all 0.25s ease;
   }
   .brand:hover{
-    background:linear-gradient(135deg,#7c3aed 0%,#a78bfa 50%,#06b6d4 100%);
+    background:linear-gradient(135deg,#22c55e 0%,#4ade80 50%,#10b981 100%);
     color:white;
   }
   .theme-toggle{
@@ -128,7 +129,7 @@
   .theme-toggle:hover{
     transform:translateY(-2px) rotate(15deg);
     border-color:var(--border-bright);
-    box-shadow:0 4px 32px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.25);
+    box-shadow:0 4px 32px rgba(0,0,0,0.5), 0 0 40px rgba(34,197,94,0.25);
   }
   .theme-toggle i{
     font-size:18px; color:var(--muted); transition:all 0.3s ease;
@@ -139,7 +140,7 @@
     box-shadow:0 4px 20px rgba(0,0,0,0.1), 0 0 0 1px rgba(139,92,246,0.1);
   }
   [data-theme="light"] .theme-toggle:hover{
-    box-shadow:0 4px 28px rgba(0,0,0,0.15), 0 0 40px rgba(139,92,246,0.15);
+    box-shadow:0 4px 28px rgba(0,0,0,0.15), 0 0 40px rgba(34,197,94,0.15);
   }
   .theme-toggle .fa-sun{ display:block; }
   .theme-toggle .fa-moon{ display:none; }
@@ -237,6 +238,36 @@
   .meta-row .v a{ color:var(--accent); text-decoration:none; }
   .meta-row .v a:hover{ text-decoration:underline; }
 
+  .shots-grid{ display:grid; grid-template-columns:repeat(3,1fr); column-gap:44px; row-gap:56px; margin-top:40px; }
+  @media (max-width:900px){ .shots-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .shots-grid{ grid-template-columns:1fr; row-gap:44px; } }
+  .shot-card{ display:flex; flex-direction:column; }
+  .shot-media{
+    border-radius:14px; overflow:hidden; border:1px solid var(--border);
+    box-shadow:0 16px 40px rgba(0,0,0,0.3); background:var(--surface-2);
+    aspect-ratio:16/10; transition:border-color var(--dur);
+  }
+  .shot-card:hover .shot-media{ border-color:var(--accent); }
+  .shot-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .shot-card h4{ font-size:14.5px; font-weight:600; margin-top:14px; }
+  .shot-card p{ font-size:13px; color:var(--muted); margin-top:4px; }
+
+  .video-showcase{
+    border-radius:14px; overflow:hidden; border:1px solid var(--border);
+    box-shadow:0 20px 60px rgba(0,0,0,0.3); background:#000;
+    margin-top:32px; transition:border-color var(--dur);
+  }
+  .video-showcase:hover{ border-color:var(--accent); }
+  .video-showcase video{ width:100%; display:block; }
+
+  .single-shot{
+    border-radius:14px; overflow:hidden; border:1px solid var(--border);
+    box-shadow:0 20px 60px rgba(0,0,0,0.3); background:var(--surface-2);
+    margin-top:32px; transition:border-color var(--dur);
+  }
+  .single-shot:hover{ border-color:var(--accent); }
+  .single-shot img{ width:100%; display:block; }
+
   footer{
     border-top:1px solid var(--border); padding:36px 0 60px;
     display:flex; justify-content:space-between; align-items:center;
@@ -255,7 +286,7 @@
   }
 </style>
 </head>
-<body>
+<body data-accent="darb">
 
 <div class="scroll-progress-indicator">
   <div class="scroll-progress-bar" id="scrollProgressBar"></div>
@@ -266,16 +297,7 @@
   <i class="fas fa-moon"></i>
 </button>
 
-<nav class="navbar">
-  <ul class="nav-menu nav-links">
-    <li><a href="../index.html#hero" class="nav-link">Home</a></li>
-    <li><a href="../index.html#mobile-portfolio" class="nav-link">Work</a></li>
-    <li><a href="../projects.html" class="nav-link">Projects</a></li>
-    <li><a href="../index.html#about" class="nav-link">About</a></li>
-    <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
-    <li><a href="https://drive.google.com/drive/folders/1_PRJsUyyVbCnhK2Y_D75CgdQ4Yf0Y7KM" class="nav-link nav-resume" target="_blank" rel="noopener">Resume <i class="fas fa-download"></i></a></li>
-  </ul>
-</nav>
+<!-- Navigation loaded dynamically -->
 
 <div class="wrap">
   <div class="breadcrumb">
@@ -286,20 +308,13 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="kicker">Case Study — Web / Crowdfunding</div>
-    <h1 class="title">DARB</h1>
-    <p class="tagline">Great ideas die because funding is too complicated. DARB makes crowdfunding simple—creators launch campaigns, supporters contribute with a click, and everyone sees exactly where the money goes.</p>
+    <div class="kicker">Case Study — Web Platform / Crowdfunding</div>
+    <h1 class="title">DARB NETWORKS</h1>
+    <p class="tagline">A transparent crowdfunding ecosystem where creators connect with supporters, ideas get funded without barriers, and every contribution is tracked from pledge to impact—built on trust, powered by technology.</p>
 
     <div class="cta-row">
       <a class="btn btn-primary" href="https://darb-networks.vercel.app/" target="_blank" rel="noopener">View Live Site →</a>
       <a class="btn btn-ghost" href="https://github.com/otikanelson/Darb-Networks" target="_blank" rel="noopener">GitHub</a>
-    </div>
-
-    <!-- Web Platform Screenshot -->
-    <div style="margin-top:48px;">
-      <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow:0 20px 60px rgba(0,0,0,0.3);">
-        <img src="../images/Darb_1.png" alt="DARB Platform" style="width:100%; display:block;" onerror="this.src='https://via.placeholder.com/1040x585/16162a/06b6d4?text=DARB+Web+Platform+Screenshot'">
-      </div>
     </div>
   </div>
 </header>
@@ -307,66 +322,241 @@
 <section id="problem">
   <div class="wrap">
     <div class="eyebrow">The Problem</div>
-    <h2>Good ideas shouldn't die because funding is hard</h2>
+    <h2>Crowdfunding is broken by complexity and distrust</h2>
     <div class="prose">
-      <p>Crowdfunding platforms exist, but they're either too complicated, take too much commission, or hide where the money actually goes. Creators deserve transparency. Supporters deserve accountability.</p>
-      <p>The barrier shouldn't be the platform—it should be the idea itself.</p>
+      <p>Traditional crowdfunding platforms create more barriers than they remove. High fees eat into already-tight budgets. Opaque payment processing leaves supporters wondering where their money actually went. Campaign creation workflows are intimidating, burying simple ideas under unnecessary complexity.</p>
+      <p>Creators abandon campaigns before launch because the setup process feels like a project in itself. Supporters hesitate to contribute because they can't see how funds are used. Both sides lose trust in a system that should be connecting them.</p>
+      <p>The platform shouldn't be the obstacle. When the technology gets in the way of human connection, good ideas die waiting for funding that never comes.</p>
     </div>
+  </div>
+</section>
+
+<section id="platform-overview">
+  <div class="wrap">
+    <div class="eyebrow">Platform Experience</div>
+    <h2>Explore the full DARB ecosystem</h2>
+    <div class="prose">
+      <p>From first landing to successful campaign launch—see how DARB simplifies crowdfunding with intuitive navigation, transparent tracking, and seamless interactions.</p>
+    </div>
+
+    <div class="video-showcase">
+      <video controls preload="metadata">
+        <source src="../images/WebPage.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:var(--muted); text-align:center;">Browse campaigns, explore project details, and see real-time funding progress across the entire platform</p>
+  </div>
+</section>
+
+<section id="discovery">
+  <div class="wrap">
+    <div class="eyebrow">Step 01 — Discovery</div>
+    <h2>Finding projects worth supporting</h2>
+    <div class="prose">
+      <p>The discovery experience prioritizes clarity. Browse featured campaigns, filter by category, search by keyword, and sort by funding status. Each campaign card shows essential information at a glance—funding progress, time remaining, and backer count.</p>
+    </div>
+
+    <div class="single-shot">
+      <img src="../images/Darb_1.png" alt="DARB platform homepage showcasing featured campaigns and navigation">
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:var(--muted); text-align:center;">Homepage featuring active campaigns with smart filtering and category-based navigation</p>
+  </div>
+</section>
+
+<section id="campaign-detail">
+  <div class="wrap">
+    <div class="eyebrow">Step 02 — Campaign Details</div>
+    <h2>Complete transparency, no hidden information</h2>
+    <div class="prose">
+      <p>Campaign pages show everything supporters need to make informed decisions. Rich project descriptions, funding goals and timelines, creator profiles, backer lists, and contribution history—all visible, all verifiable.</p>
+    </div>
+
+    <div class="single-shot">
+      <img src="../images/Darb_2.png" alt="Campaign detail page with project description, funding goal, and contribution options">
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:var(--muted); text-align:center;">Detailed campaign view with comprehensive project information and real-time funding metrics</p>
+  </div>
+</section>
+
+<section id="campaign-creation">
+  <div class="wrap">
+    <div class="eyebrow">Step 03 — Campaign Creation</div>
+    <h2>Launch in minutes, not hours</h2>
+    <div class="prose">
+      <p>Creating a campaign shouldn't require a tutorial. DARB's campaign builder uses progressive disclosure—show what's necessary, hide what's not. Rich text editing, image uploads, goal setting, and timeline configuration—all in one streamlined workflow.</p>
+    </div>
+
+    <div class="video-showcase">
+      <video controls preload="metadata">
+        <source src="../images/Campaign demo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:var(--muted); text-align:center;">Watch the complete campaign creation flow from initial setup to live publication</p>
+
+    <div class="single-shot">
+      <img src="../images/Darb_3.png" alt="Campaign creation interface with form fields for project setup">
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:var(--muted); text-align:center;">Intuitive form builder with real-time validation and preview</p>
+  </div>
+</section>
+
+<section id="dashboard">
+  <div class="wrap">
+    <div class="eyebrow">Step 04 — Creator Dashboard</div>
+    <h2>Real-time analytics that matter</h2>
+    <div class="prose">
+      <p>Once campaigns go live, creators need data—not just numbers, but insights. The dashboard tracks funding velocity, shows peak contribution times, identifies top backers, and forecasts goal completion. All updated in real-time, no refresh needed.</p>
+    </div>
+
+    <div class="single-shot">
+      <img src="../images/Darb_4.png" alt="Dashboard showing funding progress, analytics, and campaign metrics">
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:var(--muted); text-align:center;">Analytics dashboard with funding trends, backer demographics, and milestone tracking</p>
+  </div>
+</section>
+
+<section id="contribution">
+  <div class="wrap">
+    <div class="eyebrow">Step 05 — Contribution Flow</div>
+    <h2>Secure payments, instant confirmation</h2>
+    <div class="prose">
+      <p>The contribution process removes friction without sacrificing security. Choose amount, enter payment details, confirm. Behind the scenes: encryption, fraud detection, transaction logging, receipt generation—all automated, all transparent.</p>
+    </div>
+
+    <div class="single-shot">
+      <img src="../images/Darb_5.png" alt="Payment processing flow with secure checkout and contribution confirmation">
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:var(--muted); text-align:center;">Streamlined checkout with secure payment processing and instant confirmation</p>
+  </div>
+</section>
+
+<section id="profile">
+  <div class="wrap">
+    <div class="eyebrow">Step 06 — User Management</div>
+    <h2>Track your impact, manage your support</h2>
+    <div class="prose">
+      <p>Supporters see every campaign they've backed, track contribution history, manage notification preferences, and receive updates from creators. One dashboard for all crowdfunding activity.</p>
+    </div>
+
+    <div class="single-shot">
+      <img src="../images/Darb_6.png" alt="User profile and backer management interface">
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:var(--muted); text-align:center;">User profile showing backed campaigns, contribution history, and communication preferences</p>
   </div>
 </section>
 
 <section id="solution">
   <div class="wrap">
-    <div class="eyebrow">The Solution</div>
-    <h2>Simple campaigns, transparent funding</h2>
+    <div class="eyebrow">The Technology</div>
+    <h2>Built for speed, designed for trust</h2>
     <div class="prose">
-      <p>DARB is a full-stack crowdfunding platform where creators launch campaigns, set funding goals, and supporters contribute directly. Campaign management, contribution tracking, secure payments, and data visualization—all built with React.js, Tailwind CSS, Vite, and Node.js.</p>
-      <p>No middlemen. No hidden fees. Just transparent funding that gives good ideas a real shot at becoming reality.</p>
+      <p>DARB Networks runs on a modern tech stack prioritizing performance and security. React.js with Vite for instant page loads, Tailwind CSS for responsive design, Node.js for robust backend operations, and WebSocket connections for real-time updates.</p>
+      <p>Every transaction is encrypted, every database operation is transactional, and every critical workflow is tested. The platform handles payment processing, fund management, user authentication, and campaign analytics—all while maintaining sub-second response times.</p>
     </div>
 
     <div class="features-grid">
       <div class="feature-card">
         <div class="icon"><i class="fas fa-rocket"></i></div>
-        <h4>Campaign Creation</h4>
-        <p>Launch funding campaigns with goals, timelines, and detailed project descriptions.</p>
+        <h4>Instant Campaign Launch</h4>
+        <p>Create campaigns in minutes with rich text editors, image uploads, and flexible funding goals—no approval delays.</p>
       </div>
       <div class="feature-card">
         <div class="icon"><i class="fas fa-chart-line"></i></div>
-        <h4>Progress Tracking</h4>
-        <p>Real-time funding progress with visual dashboards showing contributions and milestones.</p>
+        <h4>Real-Time Progress Tracking</h4>
+        <p>Live funding dashboards with visual progress bars, milestone indicators, and time-remaining countdowns that update instantly.</p>
       </div>
       <div class="feature-card">
         <div class="icon"><i class="fas fa-credit-card"></i></div>
-        <h4>Secure Payments</h4>
-        <p>Integrated payment processing with transaction verification and receipts.</p>
+        <h4>Secure Payment Processing</h4>
+        <p>Integrated payment gateway with encryption, fraud detection, automatic receipts, and instant transaction confirmation.</p>
       </div>
       <div class="feature-card">
         <div class="icon"><i class="fas fa-users"></i></div>
-        <h4>Supporter Management</h4>
-        <p>Track contributors, send updates, and maintain communication with your backers.</p>
+        <h4>Backer Communication Hub</h4>
+        <p>Direct messaging, mass update broadcasts, comment threads, and notification systems keeping supporters engaged throughout the campaign.</p>
       </div>
       <div class="feature-card">
         <div class="icon"><i class="fas fa-eye"></i></div>
-        <h4>Transparency</h4>
-        <p>Every contribution is visible. Every expense is tracked. No hidden fees or unclear allocations.</p>
+        <h4>Full Financial Transparency</h4>
+        <p>Public ledgers showing every contribution amount, timestamp, and allocation—no hidden fees, no unclear fund usage.</p>
       </div>
       <div class="feature-card">
         <div class="icon"><i class="fas fa-chart-pie"></i></div>
-        <h4>Data Visualization</h4>
-        <p>Interactive dashboards showing funding trends, contributor demographics, and campaign performance.</p>
+        <h4>Campaign Analytics Dashboard</h4>
+        <p>Interactive charts tracking funding trends, peak contribution times, supporter geography, and conversion metrics for data-driven decisions.</p>
       </div>
+      <div class="feature-card">
+        <div class="icon"><i class="fas fa-search"></i></div>
+        <h4>Smart Campaign Discovery</h4>
+        <p>Search, filter, and browse campaigns by category, funding status, launch date, or popularity with intelligent sorting algorithms.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+        <h4>Responsive Design</h4>
+        <p>Fully optimized for desktop, tablet, and mobile—create campaigns, manage backers, and process contributions from any device.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="wrap">
+    <div class="eyebrow">Platform Architecture</div>
+    <h2>How money moves through DARB</h2>
+    <div class="prose">
+      <p>DARB operates as a two-sided marketplace with complete transparency at every step. Here's the complete funding lifecycle from campaign creation to project completion.</p>
+    </div>
+
+    <div class="features-grid" style="margin-top:32px;">
+      <div class="feature-card">
+        <div class="icon" style="background:rgba(34,197,94,0.1); color:#22c55e;">01</div>
+        <h4>Campaign Setup</h4>
+        <p>Creators fill out project details, upload visuals, set funding targets and deadlines, then publish. The platform validates inputs and generates a public campaign page instantly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon" style="background:rgba(34,197,94,0.1); color:#22c55e;">02</div>
+        <h4>Discovery & Exploration</h4>
+        <p>Campaigns appear in browse feeds, search results, and category pages. Supporters read project descriptions, view funding progress, and assess campaign credibility.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon" style="background:rgba(34,197,94,0.1); color:#22c55e;">03</div>
+        <h4>Contribution Flow</h4>
+        <p>Supporters choose contribution amounts, process payments through secure gateways, receive instant confirmation, and are added to the backer list with notification preferences.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon" style="background:rgba(34,197,94,0.1); color:#22c55e;">04</div>
+        <h4>Progress Updates</h4>
+        <p>Creators post milestones, share development updates, and communicate directly with backers. The platform sends automated notifications when funding thresholds are reached.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon" style="background:rgba(34,197,94,0.1); color:#22c55e;">05</div>
+        <h4>Fund Management</h4>
+        <p>When campaigns reach their goals, funds are released to creators. The platform tracks disbursements, generates tax documentation, and maintains public transaction records.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon" style="background:rgba(34,197,94,0.1); color:#22c55e;">06</div>
+        <h4>Post-Campaign</h4>
+        <p>Completed campaigns remain visible with final funding totals, backer counts, and project outcomes—building creator credibility for future campaigns.</p>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top:40px;">
+      <p>The entire system runs on a REST API architecture with real-time WebSocket connections for live updates. Database transactions ensure payment integrity, role-based access control protects sensitive operations, and automated testing validates critical funding workflows before deployment.</p>
     </div>
   </div>
 </section>
 
 <section id="impact">
   <div class="wrap">
-    <div class="eyebrow">Philosophy</div>
+    <div class="eyebrow">Impact & Philosophy</div>
     <blockquote class="quote">
-      Funding shouldn't be a barrier to building something meaningful. When the platform gets out of the way, ideas can speak for themselves.
+      Crowdfunding should amplify good ideas, not gatekeep them. When platforms prioritize transparency over profit margins, creators and supporters both win—and meaningful projects get the funding they deserve.
     </blockquote>
     <div class="prose" style="margin-top:24px;">
-      <p>DARB is live and functional—a working crowdfunding platform built to prove that transparency and simplicity don't have to be mutually exclusive.</p>
+      <p>DARB Networks is live, deployed, and functional—a working proof that crowdfunding platforms can operate with full transparency, minimal friction, and user-first design. No gatekeeping. No predatory fees. Just technology connecting people who want to build with people who want to support.</p>
+      <p>The platform demonstrates that modern web technologies—when applied thoughtfully—can rebuild broken systems into something better. Fast load times, real-time updates, and responsive interfaces aren't luxuries. They're requirements for platforms that respect users' time and trust.</p>
     </div>
   </div>
 </section>
@@ -375,9 +565,12 @@
   <div class="wrap">
     <div class="eyebrow">Project Details</div>
     <div class="meta-card">
-      <div class="meta-row"><div class="k">TYPE</div><div class="v">Web Crowdfunding Platform</div></div>
-      <div class="meta-row"><div class="k">ROLE</div><div class="v">Full-Stack Developer</div></div>
-      <div class="meta-row"><div class="k">TECHNOLOGY</div><div class="v">React.js · Tailwind CSS · Vite · Node.js</div></div>
+      <div class="meta-row"><div class="k">TYPE</div><div class="v">Full-Stack Web Platform</div></div>
+      <div class="meta-row"><div class="k">CATEGORY</div><div class="v">Crowdfunding / Fintech</div></div>
+      <div class="meta-row"><div class="k">ROLE</div><div class="v">Full-Stack Developer & Platform Architect</div></div>
+      <div class="meta-row"><div class="k">FRONTEND</div><div class="v">React.js · Tailwind CSS · Vite</div></div>
+      <div class="meta-row"><div class="k">BACKEND</div><div class="v">Node.js · REST API · WebSocket</div></div>
+      <div class="meta-row"><div class="k">FEATURES</div><div class="v">Campaign Management · Payment Processing · Real-Time Analytics · User Authentication</div></div>
       <div class="meta-row"><div class="k">STATUS</div><div class="v">Live & Deployed</div></div>
       <div class="meta-row"><div class="k">LIVE SITE</div><div class="v"><a href="https://darb-networks.vercel.app/" target="_blank" rel="noopener">darb-networks.vercel.app ↗</a></div></div>
       <div class="meta-row"><div class="k">SOURCE</div><div class="v"><a href="https://github.com/otikanelson/Darb-Networks" target="_blank" rel="noopener">github.com/otikanelson/Darb-Networks ↗</a></div></div>
@@ -387,7 +580,6 @@
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; width:100%;">
-    <a class="back" href="../projects.html">← Back to all projects</a>
     <span class="copyright">© 2026 Nelson Otika. All rights reserved.</span>
   </div>
 </footer>
@@ -416,5 +608,6 @@
   })();
 </script>
 
+<script src="../js/case-study-nav.js"></script>
 </body>
 </html>

@@ -1,482 +1,147 @@
-/* ═══════════════════════════════════════════════════════════════
-   DESKTOP PROJECTS - FLOATING BROWSER WINDOW
-   ═══════════════════════════════════════════════════════════════ */
-
-.desktop-row {
-    overflow: visible;
-}
-
-.desktop-showcase {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 60px;
-    align-items: center;
-    padding: 40px 0;
-}
-
-.laptop-container {
-    position: relative;
-    animation: fadeInLeft 0.8s ease-out;
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Browser Window Container */
-.laptop-screen {
-    position: relative;
-    background: #ffffff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow:
-        0 32px 64px -12px rgba(0, 0, 0, 0.3),
-        0 16px 32px -8px rgba(0, 0, 0, 0.2),
-        0 0 0 1px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.laptop-screen:hover {
-    transform: translateY(-4px);
-    box-shadow:
-        0 40px 80px -12px rgba(0, 0, 0, 0.35),
-        0 20px 40px -8px rgba(0, 0, 0, 0.25),
-        0 0 0 1px rgba(0, 0, 0, 0.05);
-}
-
-/* Browser Chrome/Header */
-.laptop-bezel {
-    position: relative;
-    background: linear-gradient(to bottom, #f5f5f5 0%, #e8e8e8 100%);
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-/* Browser Window Controls (macOS style) */
-.laptop-camera {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.laptop-camera::before,
-.laptop-camera::after,
-.laptop-camera {
-    content: '';
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: block;
-}
-
-.laptop-camera::before {
-    background: #ff5f57;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-.laptop-camera {
-    background: #ffbd2e;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-.laptop-camera::after {
-    background: #28c840;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* Address Bar */
-.browser-address-bar {
-    flex: 1;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 0.75rem;
-    color: #666;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.browser-address-bar::before {
-    content: '\f023'; /* Lock icon */
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    color: #28c840;
-    font-size: 0.7rem;
-}
-
-/* Screenshot Display Area */
-.laptop-display {
-    position: relative;
-    background: #ffffff;
-    overflow: hidden;
-    width: 100%;
-    /* Responsive aspect ratio - taller for desktop apps */
-    aspect-ratio: 16 / 11;
-}
-
-.laptop-display img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-}
-
-/* Hide old laptop base - not needed for floating window */
-.laptop-base {
-    display: none;
-}
-
-/* Carousel Controls */
-.desktop-carousel {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.carousel-track {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.carousel-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-}
-
-.carousel-slide.active {
-    opacity: 1;
-    pointer-events: all;
-}
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 10;
-    opacity: 0;
-}
-
-.laptop-container:hover .carousel-btn {
-    opacity: 1;
-}
-
-.carousel-btn:hover {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-btn i {
-    font-size: 0.9rem;
-}
-
-.prev-btn {
-    left: -22px;
-}
-
-.next-btn {
-    right: -22px;
-}
-
-.carousel-dots {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 10;
-    padding: 8px 16px;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px);
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.carousel-dot {
-    width: 8px;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.carousel-dot:hover {
-    background: rgba(255, 255, 255, 0.8);
-}
-
-.carousel-dot.active {
-    background: var(--primary-color);
-    width: 28px;
-    border-radius: 4px;
-}
-
-/* Project Details Section */
-.desktop-project-details {
-    animation: fadeInRight 0.8s ease-out 0.2s both;
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.desktop-detail-header {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.desktop-project-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 16px;
-    object-fit: cover;
-    border: 1px solid var(--border);
-    background: var(--card-bg);
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.desktop-project-meta {
-    flex: 1;
-}
-
-.desktop-project-name {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-}
-
-.desktop-project-subtitle {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-}
-
-.desktop-project-tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
-.desktop-project-description {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 24px;
-}
-
-.desktop-project-features {
-    margin-bottom: 28px;
-}
-
-.desktop-project-features h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 12px;
-}
-
-.desktop-project-features ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.desktop-project-features li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
-    padding-left: 4px;
-}
-
-.desktop-project-features li i {
-    color: var(--primary-light);
-    font-size: 0.85rem;
-}
-
-.desktop-project-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-/* Mobile Responsive */
-@media (max-width: 1024px) {
-    .desktop-showcase {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .laptop-container {
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 768px) {
-    .desktop-row .view-all-link {
-        font-size: 0.72rem !important;
-        white-space: nowrap !important;
-        gap: 5px !important;
-        border-radius: 20px !important;
-        flex-shrink: 0 !important;
-        align-self: center !important;
-    }
-
-    .desktop-row .view-all-link span {
-        display: inline-block !important;
-    }
-
-    .desktop-row .view-all-link i {
-        font-size: 0.65rem !important;
-    }
-
-    .desktop-showcase {
-        padding: 20px 0;
-        gap: 32px;
-    }
-
-    .laptop-bezel {
-        padding: 10px 12px;
-    }
-
-    .laptop-camera::before,
-    .laptop-camera::after,
-    .laptop-camera {
-        width: 10px;
-        height: 10px;
-    }
-
-    .browser-address-bar {
-        font-size: 0.7rem;
-        padding: 5px 10px;
-    }
-
-    .carousel-btn {
-        width: 36px;
-        height: 36px;
-    }
-
-    .prev-btn {
-        left: 8px;
-    }
-
-    .next-btn {
-        right: 8px;
-    }
-
-    .carousel-dots {
-        padding: 6px 12px;
-    }
-}
-
-/* Light Theme Adjustments */
-[data-theme="light"] .laptop-screen {
-    background: #ffffff;
-    box-shadow:
-        0 32px 64px -12px rgba(0, 0, 0, 0.2),
-        0 16px 32px -8px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .laptop-screen:hover {
-    box-shadow:
-        0 40px 80px -12px rgba(0, 0, 0, 0.25),
-        0 20px 40px -8px rgba(0, 0, 0, 0.18),
-        0 0 0 1px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .laptop-bezel {
-    background: linear-gradient(to bottom, #f5f5f5 0%, #e8e8e8 100%);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .browser-address-bar {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #666;
-}
-
-[data-theme="light"] .laptop-display {
-    background: #ffffff;
-}
-
-[data-theme="light"] .carousel-btn {
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .carousel-btn:hover {
-    background: var(--primary-color);
-    color: #ffffff;
-}
-
-[data-theme="light"] .carousel-dots {
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="light"] .carousel-dot {
-    background: rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="light"] .carousel-dot:hover {
-    background: rgba(0, 0, 0, 0.5);
-}
+        .desktop-portfolio-section {
+            padding: 60px 20px;
+        }
+
+        .desktop-showcase {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            align-items: center;
+            border-radius: 10px;
+            padding: 32px;
+            margin-top: 24px;
+            box-shadow: 0 40px 50px rgba(0, 0, 0, 0.3);
+            transition: border-color 0.3s ease;
+        }
+
+        .desktop-showcase:hover {
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        /* Laptop Container Enhancements */
+        .laptop-container {
+            width: 100%;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #0d1117;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .laptop-display img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        /* Project Details Styling */
+        .desktop-project-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .desktop-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* Logo/Icon Container Next to Title */
+        .desktop-project-logo-wrap {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(190, 24, 93, 0.15));
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
+        }
+
+        .desktop-project-logo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .desktop-project-logo-wrap i {
+            font-size: 22px;
+            color: #ec4899;
+        }
+
+        .desktop-project-name {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .desktop-project-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        /* Tags */
+        .desktop-project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .desktop-project-description {
+            font-size: 14.5px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* Feature List */
+        .desktop-project-features h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .desktop-project-features ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 0;
+        }
+
+        .desktop-project-features li {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .desktop-project-features li i {
+            color: #ec4899;
+            font-size: 13px;
+        }
+
+        /* Actions */
+        .desktop-project-actions {
+            margin-top: 8px;
+        }
+
+        @media (max-width: 992px) {
+            .desktop-showcase {
+                grid-template-columns: 1fr;
+                padding: 24px;
+            }
+        }
